@@ -1,0 +1,18 @@
+# Dependency directories
+# โฟลเดอร์ที่เก็บ library ต่างๆ ที่เราติดตั้ง ไม่ต้องเอาขึ้น GitHub
+/backend/node_modules
+
+# Environment variables
+# ไฟล์เก็บข้อมูลสำคัญ เช่น API Key ห้ามเอาขึ้น GitHub เด็ดขาด!
+/backend/.env
+
+# Log files
+# ไฟล์ log ที่อาจถูกสร้างขึ้นระหว่างการทำงาน
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+# ไฟล์ขยะจากระบบปฏิบัติการ (macOS, Windows)
+.DS_Store
+Thumbs.db

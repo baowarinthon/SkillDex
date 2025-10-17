@@ -1,0 +1,41 @@
+.mobile{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile{
+        display: block;
+    }
+
+    .headline{
+        font-size: 40px;
+    }
+
+    canvas{
+        display: none;
+    }
+
+    .headline span{
+        margin-top: -16px;
+    }
+
+    .hero-desc{
+        font-size: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    .mobile-deco{
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+    }
+
+    #featureSection::before{
+        animation: none;
+    }
+
+    #heroSection{
+        padding-top: 120px;
+    }
+}

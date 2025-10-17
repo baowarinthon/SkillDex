@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDex | New Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="new-form.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <aside class="form-sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">SkillDex</h2>
+                <p class="sidebar-subtitle">กรอกข้อมูลของคุณ</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#section-about" class="nav-link active">1. เกี่ยวกับคุณ</a>
+                <a href="#section-career" class="nav-link">2. เข็มทิศอาชีพ</a>
+                <a href="#section-skills" class="nav-link">3. คลังทักษะ</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>ข้อมูลจะถูกบันทึกอัตโนมัติ</p>
+            </div>
+        </aside>
+
+        <main class="form-main">
+            <form id="skilldex-form" novalidate autocomplete="off">
+                
+                <section id="section-about" class="form-section">
+                    <div class="section-header">
+                        <h3>1. เกี่ยวกับคุณ</h3>
+                        <p>ข้อมูลพื้นฐานเพื่อทำความรู้จักคุณให้มากขึ้น</p>
+                    </div>
+                    <div class="card">
+                        <div class="form-group">
+                            <label for="fullName">ชื่อ-นามสกุล</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="เช่น สมชาย ใจดี">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">อีเมล</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>สถานะปัจจุบัน</label>
+                            <div class="radio-group-pills">
+                                <label><input type="radio" name="currentStatus" value="student"><span>นักศึกษา</span></label>
+                                <label><input type="radio" name="currentStatus" value="employee"><span>พนักงานบริษัท</span></label>
+                                <label><input type="radio" name="currentStatus" value="freelance"><span>ฟรีแลนซ์</span></label>
+                            </div>
+                        </div>
+                        <div id="studentFields" class="form-group hidden">
+                            <label for="university">สถาบันการศึกษา</label>
+                            <input type="text" id="university" name="university" placeholder="เช่น มหาวิทยาลัย SkillDex">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-career" class="form-section">
+                    <div class="section-header">
+                        <h3>2. เข็มทิศอาชีพ</h3>
+                        <p>เป้าหมายและเส้นทางที่คุณสนใจ</p>
+                    </div>
+                    <div class="card">
+                        <div class="form-group">
+                            <label>ความชัดเจนในเส้นทางอาชีพ</label>
+                            <div class="radio-group-vertical">
+                                <label><input type="radio" name="careerClarity" value="A"><span>ชัดเจนมาก รู้ว่าอยากทำอะไร</span></label>
+                                <label><input type="radio" name="careerClarity" value="B"><span>พอมีไอเดีย แต่ยังไม่แน่ใจ</span></label>
+                                <label><input type="radio" name="careerClarity" value="C"><span>กำลังค้นหาตัวเอง</span></label>
+                            </div>
+                        </div>
+                        <div id="careerGoalFields" class="hidden">
+                            <div class="form-group">
+                                <label for="targetProfessionInput">อาชีพที่สนใจ (พิมพ์แล้วกด Enter)</label>
+                                <div class="tag-container" data-source="professions" data-limit="1">
+                                    <input type="text" id="targetProfessionInput" name="targetProfession" placeholder="เช่น UX/UI Designer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-skills" class="form-section">
+                    <div class="section-header">
+                        <h3>3. คลังทักษะ</h3>
+                        <p>ทักษะและประสบการณ์ที่คุณมี</p>
+                    </div>
+                    <div class="card">
+                        <div class="form-group">
+                            <label>ทักษะ (Hard Skills)</label>
+                            <div id="hardSkillsContainer" class="skills-grid">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label>ทักษะ (Soft Skills) - เลือก 3 อย่างที่โดดเด่น</label>
+                            <div id="softSkillsContainer" class="checkbox-group-pills" data-limit="3">
+                                </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                     <div class="card submission-card">
+                         <h3>เกือบเสร็จแล้ว!</h3>
+                         <p>ตรวจสอบข้อมูลของคุณอีกครั้งก่อนไปยังหน้าแดชบอร์ด</p>
+                         <button type="submit" class="submit-button">ไปยังหน้าแดชบอร์ด</button>
+                     </div>
+                </section>
+
+            </form>
+        </main>
+    </div>
+
+    <script src="new-form.js"></script>
+</body>
+</html>

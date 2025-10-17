@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDex - Pre-Onboarding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/iku2alf.css">
+</head>
+<body class="skilldex-form-body">
+
+    <div class="skilldex-form-decorate">
+        <img src="assets/images/form.svg" alt="">
+    </div>
+
+    <div class="skilldex-container">
+
+        <img src="assets/images/logo_mark.svg" alt="" class="skilldex-logo-mark">
+        
+        <div class="skilldex-progressbar-container">
+            <div id="progressBar" class="skilldex-progressbar-inner" style="width: 0%">0%</div>
+        </div>
+
+        <form id="skilldexForm" class="skilldex-form" autocomplete="off" novalidate>
+
+            <section id="pageWelcome" class="skilldex-page">
+                <div class="skilldex-page-content">
+                    <img src="assets/images/form.png" alt="">
+                    <h1 class="skilldex-heading">ให้เราได้รู้จักคุณ</h1>
+                    <p class="skilldex-text">
+                        แบบสอบถามนี้จะใช้เวลาประมาณ 5 นาที เพื่อให้ AI ของเราทำความรู้จักคุณ <br>
+และสามารถแนะนำเส้นทางอาชีพ แผนการเรียนรู้ และโอกาสที่ใช่สำหรับคุณโดยเฉพาะ
+                    </p>
+                    <button type="button" data-next="sectionAbout" class="skilldex-button">เริ่มทำแบบสอบถาม</button>
+                </div>
+            </section>
+            
+            <section id="sectionAbout" class="skilldex-section hidden">
+                <h2 class="skilldex-section-heading">ข้อมูลพื้นฐาน</h2>
+                <p class="skilldex-section-text">มาเริ่มทำความรู้จักกันมากยิ่งขึ้น</p>
+
+                <div class="skilldex-grid">
+                    <div class="skilldex-form-group">
+                        <label for="fullName" class="skilldex-label required">ชื่อ</label>
+                        <input type="text" id="fullName" name="fullName" class="skilldex-input required" required placeholder="มิก">
+                        <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                    <div class="skilldex-form-group">
+                        <label for="email" class="skilldex-label required">อีเมล</label>
+                        <input type="email" id="email" name="email" class="skilldex-input required" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="somchai.j@example.com">
+                        <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                </div>
+
+                <div class="skilldex-form-group">
+                    <label for="currentStatus" class="skilldex-label required">สถานะปัจจุบันของคุณ</label>
+                    <select id="currentStatus" name="currentStatus" class="skilldex-select required" required>
+                        <option value="">-- กรุณาเลือก --</option>
+                        <option value="student">นักเรียน/นักศึกษา</option>
+                        <option value="graduate">จบการศึกษาแล้ว (กำลังหางาน)</option>
+                        <option value="employee">ทำงานแล้ว</option>
+                        <option value="freelance">ฟรีแลนซ์ / เจ้าของกิจการ</option>
+                    </select>
+                    <div class="skilldex-error-message validation-message"></div>
+                </div>
+
+                <div id="studentFields" class="skilldex-student-fields hidden">
+                    <div class="skilldex-form-group skilldex-autocomplete-container">
+                        <label for="university" class="skilldex-label required">สถาบัน/มหาวิทยาลัย</label>
+                        <div class="skilldex-input-wrapper">
+                            <input type="text" id="university" name="university" class="skilldex-input required" required placeholder="พิมพ์เพื่อค้นหา..." data-source="universities.json">
+                            <div class="skilldex-autocomplete-suggestions hidden"></div>
+                        </div>
+                         <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                    <div class="skilldex-grid">
+                         <div class="skilldex-form-group skilldex-autocomplete-container">
+                            <label for="faculty" class="skilldex-label required">คณะ</label>
+                            <input type="text" id="faculty" name="faculty" class="skilldex-input required" required placeholder="เช่น วิศวกรรมศาสตร์" data-source="faculties.json">
+                             <div class="skilldex-autocomplete-suggestions hidden"></div>
+                             <div class="skilldex-error-message validation-message"></div>
+                        </div>
+                        <div class="skilldex-form-group skilldex-autocomplete-container">
+                            <label for="major" class="skilldex-label required">สาขาวิชาและวิชาเอก</label>
+                            <input type="text" id="major" name="major" class="skilldex-input required" required placeholder="เช่น วิศวกรรมคอมพิวเตอร์">
+                            <div class="skilldex-autocomplete-suggestions hidden"></div>
+                            <div class="skilldex-error-message validation-message"></div>
+                        </div>
+                    </div>
+                    <div class="skilldex-form-group">
+                        <label for="curriculum" class="skilldex-label">เนื้อหาที่เรียน</label>
+                        <textarea id="curriculum" name="curriculum" rows="3" class="skilldex-textarea" placeholder="เล่าสั้นๆ เกี่ยวกับสิ่งที่เรียน เช่น AI, Web Development, Data Science"></textarea>
+                    </div>
+                    <div class="skilldex-form-group">
+                        <label for="studyYear" class="skilldex-label required">ชั้นปี</label>
+                        <select id="studyYear" name="studyYear" class="skilldex-select required" required>
+                             <option value="">-- กรุณาเลือก --</option>
+                             <option value="1">ปี 1</option>
+                             <option value="2">ปี 2</option>
+                             <option value="3">ปี 3</option>
+                             <option value="4">ปี 4</option>
+                             <option value="master">สูงกว่าปริญญาตรี</option>
+                        </select>
+                        <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                    <div class="skilldex-form-group">
+                        <label for="resumeUpload" class="skilldex-label">อัปโหลดไฟล์ (Portfolio/Resume)</label>
+                        <input type="file" id="resumeUpload" name="resumeUpload" class="skilldex-input optional" accept=".pdf">
+                        <p class="skilldex-input-description">จำกัดไฟล์ PDF ขนาดไม่เกิน 5MB</p>
+                    </div>
+                </div>
+                
+                <div id="employeeFields" class="skilldex-employee-fields hidden">
+                    <div class="skilldex-form-group skilldex-autocomplete-container">
+                        <label for="jobTitle" class="skilldex-label required">ตำแหน่งงานปัจจุบัน</label>
+                        <input type="text" id="jobTitle" name="jobTitle" class="skilldex-input required" required placeholder="เช่น Software Engineer" data-source="jobs.json">
+                        <div class="skilldex-autocomplete-suggestions hidden"></div>
+                        <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                    <div class="skilldex-grid">
+                        <div class="skilldex-form-group">
+                            <label for="industry" class="skilldex-label required">ประเภทอุตสาหกรรม</label>
+                            <select id="industry" name="industry" class="skilldex-select required" required>
+                                <option value="">-- กรุณาเลือก --</option>
+                                <option value="tech">เทคโนโลยี</option>
+                                <option value="finance">การเงิน</option>
+                                <option value="marketing">การตลาด</option>
+                                <option value="health">สุขภาพ</option>
+                                <option value="other">อื่นๆ</option>
+                            </select>
+                             <div class="skilldex-error-message validation-message"></div>
+                        </div>
+                        <div class="skilldex-form-group">
+                            <label for="workExperience" class="skilldex-label required">ประสบการณ์ทำงาน</label>
+                            <select id="workExperience" name="workExperience" class="skilldex-select required" required>
+                                <option value="">-- กรุณาเลือก --</option>
+                                <option value="<1">น้อยกว่า 1 ปี</option>
+                                <option value="1-3">1-3 ปี</option>
+                                <option value="3-5">3-5 ปี</option>
+                                <option value=">5">5 ปีขึ้นไป</option>
+                            </select>
+                             <div class="skilldex-error-message validation-message"></div>
+                        </div>
+                    </div>
+                     <div class="skilldex-form-group">
+                        <label for="resumeUpload" class="skilldex-label">อัปโหลดไฟล์ (Portfolio/Resume)</label>
+                        <input type="file" id="resumeUpload" name="resumeUpload" class="skilldex-input optional" accept=".pdf">
+                        <!-- <p class="skilldex-input-description">จำกัดไฟล์ PDF ขนาดไม่เกิน 5MB</p> -->
+                    </div>
+                </div>
+
+                <div class="skilldex-button-group">
+                    <button type="button" data-back="pageWelcome" class="skilldex-button skilldex-button-secondary">ย้อนกลับ</button>
+                    <button type="button" data-next="sectionCareerCompass" class="skilldex-button skilldex-button-primary">ถัดไป</button>
+                </div>
+            </section>
+
+             <section id="sectionCareerCompass" class="skilldex-section hidden">
+                <h2 class="skilldex-section-heading">เส้นทางอาชีพ</h2>
+                <p class="skilldex-section-text">คำตอบของคุณจะช่วยให้เราเลือกชุดคำถามที่เหมาะสมกับคุณที่สุด</p>
+                
+                <div class="skilldex-form-group">
+                    <label class="skilldex-label required">ตอนนี้คุณมีความชัดเจนในเส้นทางอาชีพของตัวเองมากน้อยแค่ไหน?</label>
+                    <div class="skilldex-card-select-group">
+                        <label>
+                            <input type="radio" name="careerClarity" value="A" class="skilldex-hidden-radio required" required>
+                            <div class="skilldex-card-option">
+                                <h3 class="skilldex-card-heading">ยังไม่แน่ใจเลย</h3>
+                                <p class="skilldex-card-text">ว่าอยากทำอาชีพอะไร กำลังค้นหาตัวเองอยู่</p>
+                            </div>
+                        </label>
+                         <label>
+                            <input type="radio" name="careerClarity" value="B" class="skilldex-hidden-radio required" required>
+                            <div class="skilldex-card-option">
+                                <h3 class="skilldex-card-heading">มีที่สนใจอยู่บ้าง</h3>
+                                <p class="skilldex-card-text">แต่มีหลายทางเลือกและยังตัดสินใจไม่ได้</p>
+                            </div>
+                        </label>
+                         <label>
+                            <input type="radio" name="careerClarity" value="C" class="skilldex-hidden-radio required" required>
+                            <div class="skilldex-card-option">
+                                <h3 class="skilldex-card-heading">มีเป้าหมายชัดเจนแล้ว</h3>
+                                <p class="skilldex-card-text">และต้องการแผนพัฒนาตัวเองให้ไปถึงเป้าหมาย</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="skilldex-error-message validation-message"></div>
+                </div>
+
+                <div class="skilldex-button-group">
+                    <button type="button" data-back="sectionAbout" class="skilldex-button skilldex-button-secondary">ย้อนกลับ</button>
+                    <button type="button" data-next="sectionExplorePlan" class="skilldex-button skilldex-button-primary">ถัดไป</button>
+                </div>
+            </section>
+            
+            <section id="sectionExplorePlan" class="skilldex-section hidden">
+                 <h2 class="skilldex-section-heading">สำรวจและวางแผน</h2>
+                <div id="setA" class="skilldex-set hidden">
+                     <p class="skilldex-section-text">ไม่ต้องกังวล ลองตอบคำถามเหล่านี้จากความรู้สึกของคุณ เพื่อให้เราช่วยคุณค้นหาแนวทางที่น่าสนใจ</p>
+                    <div class="skilldex-form-group" id="favoriteActivities">
+                        <label class="skilldex-label required">เลือกกิจกรรมที่คุณชอบทำ หรือรู้สึกว่าทำได้ดี</label>
+                        <div class="skilldex-tag-container" data-max-tags="5" data-source="activities.json">
+                             <input type="text" placeholder="พิมพ์เพื่อเพิ่มกิจกรรม เช่น ออกแบบกราฟิก, เขียนโค้ด...">
+                        </div>
+                        <div class="skilldex-error-message hidden">เลือกได้ไม่เกิน 5 อย่าง</div>
+                         <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                    <div class="skilldex-form-group">
+                        <label class="skilldex-label ">คุณชอบสภาพแวดล้อมการทำงานแบบไหน?</label>
+                        <div class="skilldex-space-y-4">
+                            <div>
+                                <!-- <p class="skilldex-text skilldex-text-sm">การทำงานร่วมกับคนอื่น:</p> -->
+                                <div class="skilldex-flex">
+                                    <label class="skilldex-flex-1"><input type="radio" name="workCollaboration" value="solo" class="skilldex-hidden-radio required" required><div class="skilldex-card-option skilldex-text-center">เน้นทำคนเดียว</div></label>
+                                    <label class="skilldex-flex-1"><input type="radio" name="workCollaboration" value="team" class="skilldex-hidden-radio required" required><div class="skilldex-card-option skilldex-text-center">ทำงานเป็นทีม</div></label>
+                                </div>
+                                 <div class="skilldex-error-message validation-message"></div>
+                            </div>
+                            <div>
+                                <!-- <p class="skilldex-text skilldex-text-sm">ความแน่นอนของงาน:</p> -->
+                                <div class="skilldex-flex">
+                                    <label class="skilldex-flex-1"><input type="radio" name="workPace" value="structured" class="skilldex-hidden-radio required" required><div class="skilldex-card-option skilldex-text-center">มีขั้นตอนชัดเจน</div></label>
+                                    <label class="skilldex-flex-1"><input type="radio" name="workPace" value="dynamic" class="skilldex-hidden-radio required" required><div class="skilldex-card-option skilldex-text-center">แก้ปัญหาใหม่ๆ</div></label>
+                                </div>
+                                <div class="skilldex-error-message validation-message"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skilldex-form-group" data-max-select="3">
+                        <label class="skilldex-label required">อะไรคือ 3 สิ่งที่คุณให้ความสำคัญที่สุดในการทำงาน?</label>
+                        <div class="skilldex-grid2">
+                            <label><input type="checkbox" name="workValues" value="income" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card skilldex-text-center">รายได้สูง</div></label>
+                            <label><input type="checkbox" name="workValues" value="security" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card skilldex-text-center">ความมั่นคง</div></label>
+                            <label><input type="checkbox" name="workValues" value="growth" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card skilldex-text-center">โอกาสเติบโต</div></label>
+                            <label><input type="checkbox" name="workValues" value="balance" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card skilldex-text-center">Work-Life Balance</div></label>
+                            <label><input type="checkbox" name="workValues" value="impact" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card skilldex-text-center">สร้างผลกระทบ</div></label>
+                            <label><input type="checkbox" name="workValues" value="learning" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card skilldex-text-center">เรียนรู้สิ่งใหม่</div></label>
+                        </div>
+                         <div class="skilldex-error-message hidden">เลือกได้ไม่เกิน 3 ข้อ</div>
+                         <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                </div>
+
+                <div id="setB" class="skilldex-set hidden">
+                     <p class="skilldex-section-text">การมีตัวเลือกเป็นสิ่งที่ดีครับ ให้ข้อมูลกับเราอีกนิดเพื่อช่วยให้คุณตัดสินใจได้ง่ายขึ้น</p>
+                    <div class="skilldex-form-group">
+                        <label class="skilldex-label skilldex-label-bold required">ระบุสายอาชีพที่คุณสนใจ</label>
+                        <div class="skilldex-tag-container" data-source="professions.json">
+                             <input type="text" placeholder="พิมพ์เพื่อค้นหาสายอาชีพ เช่น Data Scientist...">
+                        </div>
+                        <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                    <div class="skilldex-form-group">
+                        <label class="skilldex-label skilldex-label-bold">คุณต้องการข้อมูลเปรียบเทียบอาชีพเหล่านี้ในด้านใดบ้าง?</label>
+                        <div class="skilldex-grid2">
+                            <label><input type="checkbox" name="comparisonPoints" value="skills" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ทักษะที่จำเป็น</div></label>
+                            <label><input type="checkbox" name="comparisonPoints" value="salary" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">เงินเดือนเฉลี่ย</div></label>
+                            <label><input type="checkbox" name="comparisonPoints" value="path" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">เส้นทางการเติบโต</div></label>
+                            <label><input type="checkbox" name="comparisonPoints" value="daily_tasks" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ลักษณะงานในแต่ละวัน</div></label>
+                            <label><input type="checkbox" name="comparisonPoints" value="market_demand" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ความต้องการของตลาด</div></label>
+                        </div>
+                    </div>
+                    <div class="skilldex-form-group" data-max-select="2">
+                        <label class="skilldex-label skilldex-label-bold required">อะไรคือปัจจัยสำคัญที่สุดในการตัดสินใจของคุณ? (เลือก 2 ข้อ)</label>
+                         <div class="skilldex-grid2">
+                             <label><input type="checkbox" name="decisionFactors" value="passion" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ความชอบ/ถนัด</div></label>
+                             <label><input type="checkbox" name="decisionFactors" value="market" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ความต้องการตลาด</div></label>
+                             <label><input type="checkbox" name="decisionFactors" value="growth" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ศักยภาพเติบโต</div></label>
+                             <label><input type="checkbox" name="decisionFactors" value="salary" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ผลตอบแทน</div></label>
+                        </div>
+                        <div class="skilldex-error-message hidden">เลือกได้ไม่เกิน 2 ข้อ</div>
+                        <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                </div>
+
+                <div id="setC" class="skilldex-set hidden">
+                     <p class="skilldex-section-text">ยอดเยี่ยมเลย! การมีเป้าหมายที่ชัดเจนคือจุดเริ่มต้นที่ดี เรามาวางแผนเพื่อไปให้ถึงจุดนั้นกัน</p>
+                    <div class="skilldex-form-group skilldex-autocomplete-container">
+                        <label for="targetProfession" class="skilldex-label required">อาชีพเป้าหมายของคุณคืออะไร?</label>
+                        <input type="text" id="targetProfession" name="targetProfession" class="skilldex-input required" required placeholder="พิมพ์เพื่อค้นหาอาชีพ..." data-source="professions.json">
+                        <div class="skilldex-autocomplete-suggestions hidden"></div>
+                        <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                    <div class="skilldex-form-group">
+                         <label for="careerGoal" class="skilldex-label required">เป้าหมายของคุณในอีก 3-5 ปีข้างหน้าในสายงานนี้คืออะไร?</label>
+                         <select id="careerGoal" name="careerGoal" class="skilldex-select required" required>
+                            <option value="">-- กรุณาเลือก --</option>
+                            <option value="specialist">เป็นผู้เชี่ยวชาญในสายงาน (Specialist/Expert)</option>
+                            <option value="manager">เป็นหัวหน้าทีม/ผู้จัดการ (Team Lead/Manager)</option>
+                            <option value="top_company">ย้ายไปทำงานในบริษัทชั้นนำ</option>
+                            <option value="entrepreneur">เปิดบริษัท/เป็นฟรีแลนซ์</option>
+                            <option value="other">อื่นๆ</option>
+                         </select>
+                         <input type="text" id="careerGoalOther" name="careerGoalOther" class="skilldex-input skilldex-input-other hidden" placeholder="โปรดระบุเป้าหมายของคุณ">
+                         <div class="skilldex-error-message validation-message"></div>
+                    </div>
+                     <div class="skilldex-form-group">
+                        <label class="skilldex-label ">คุณคิดว่าต้องพัฒนาทักษะอะไรเพิ่มเติมเพื่อไปถึงเป้าหมาย?</label>
+                        <input type="text" id="futureSkills" name="futureSkills" class="skilldex-input" placeholder="ระบุทักษะที่ต้องการพัฒนา...">
+                    </div>
+                     <div class="skilldex-form-group">
+                        <label class="skilldex-label ">คุณสนใจพัฒนาตัวเองในรูปแบบใดมากที่สุด?</label>
+                         <div class="skilldex-grid2">
+                             <label><input type="checkbox" name="devMethods" value="online_course" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">คอร์สออนไลน์</div></label>
+                             <label><input type="checkbox" name="devMethods" value="projects" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ทำโปรเจกต์จริง</div></label>
+                             <label><input type="checkbox" name="devMethods" value="reading" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">อ่านบทความ/หนังสือ</div></label>
+                             <label><input type="checkbox" name="devMethods" value="community" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">หา Community</div></label>
+                        </div>
+                    </div>
+                </div>
+                 <div class="skilldex-button-group">
+                    <button type="button" data-back="sectionCareerCompass" class="skilldex-button skilldex-button-secondary">ย้อนกลับ</button>
+                    <button type="button" data-next="sectionSkillInventory" class="skilldex-button skilldex-button-primary">ถัดไป</button>
+                </div>
+            </section>
+
+             <section id="sectionSkillInventory" class="skilldex-section hidden">
+                 <h2 class="skilldex-section-heading">ทักษะและประสบการณ์</h2>
+                 <p class="skilldex-section-text">บอกให้เรารู้หน่อยว่าคุณมีทักษะอะไรบ้าง</p>
+                
+                <div class="skilldex-form-group">
+                    <label class="skilldex-label required">ทักษะเฉพาะทาง (Hard Skills) ที่คุณมี</label>
+                    <div class="skilldex-tag-container required" data-min-tags="1" data-source="skills.json">
+                        <input type="text" placeholder="เพิ่มทักษะ เช่น Python, SQL, Figma...">
+                    </div>
+                    <div class="skilldex-skill-levels"></div>
+                    <div class="skilldex-error-message validation-message"></div>
+                </div>
+<!-- 
+                <div class="skilldex-form-group" data-min-select="1">
+                    <label class="skilldex-label skilldex-label-bold required">ทักษะทั่วไป (Soft Skills) ที่คุณคิดว่าเป็นจุดแข็ง</label>
+                    <div class="skilldex-grid2">
+                        <label><input type="checkbox" name="softSkills" value="communication" class="skilldex-hidden-checkbox required"><div class="skilldex-checkbox-card">การสื่อสาร</div></label>
+                        <label><input type="checkbox" name="softSkills" value="teamwork" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การทำงานเป็นทีม</div></label>
+                        <label><input type="checkbox" name="softSkills" value="problem_solving" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การแก้ปัญหา</div></label>
+                        <label><input type="checkbox" name="softSkills" value="leadership" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ความเป็นผู้นำ</div></label>
+                        <label><input type="checkbox" name="softSkills" value="adaptability" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การปรับตัว</div></label>
+                        <label><input type="checkbox" name="softSkills" value="creativity" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ความคิดสร้างสรรค์</div></label>
+                        <label><input type="checkbox" name="softSkills" value="time_management" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การบริหารเวลา</div></label>
+                    </div>
+                    <div class="skilldex-error-message hidden">เลือกได้ไม่เกิน 5 ข้อ</div>
+                     <div class="skilldex-error-message validation-message"></div>
+                </div> -->
+
+                <div class="skilldex-form-group" data-min-select="1" data-max-select="5">
+    <label class="skilldex-label required">ทักษะทั่วไป (Soft Skills) ที่คุณคิดว่าเป็นจุดแข็ง</label>
+    <div class="skilldex-grid2">
+        <label><input type="checkbox" name="softSkills" value="communication" class="skilldex-hidden-checkbox required"><div class="skilldex-checkbox-card">การสื่อสาร</div></label>
+                        <label><input type="checkbox" name="softSkills" value="teamwork" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การทำงานเป็นทีม</div></label>
+                        <label><input type="checkbox" name="softSkills" value="problem_solving" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การแก้ปัญหา</div></label>
+                        <label><input type="checkbox" name="softSkills" value="leadership" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ความเป็นผู้นำ</div></label>
+                        <label><input type="checkbox" name="softSkills" value="adaptability" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การปรับตัว</div></label>
+                        <label><input type="checkbox" name="softSkills" value="creativity" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">ความคิดสร้างสรรค์</div></label>
+                        <label><input type="checkbox" name="softSkills" value="time_management" class="skilldex-hidden-checkbox"><div class="skilldex-checkbox-card">การบริหารเวลา</div></label>
+    </div>
+    <div class="skilldex-error-message hidden">เลือกได้ไม่เกิน 5 ข้อ</div>
+    <div class="skilldex-error-message validation-message"></div>
+</div>
+
+                <div class="skilldex-form-group">
+                    <label for="experience" class="skilldex-label">(ไม่บังคับ) เล่าประสบการณ์ฝึกงาน, โปรเจกต์ หรือกิจกรรมที่โดดเด่นสั้นๆ</label>
+                    <textarea id="experience" name="experience" rows="4" class="skilldex-textarea" placeholder="โปรเจกต์ที่ภูมิใจนำเสนอ หรือประสบการณ์ที่สำคัญ..."></textarea>
+                </div>
+                
+                 <div class="skilldex-button-group">
+                    <button type="button" data-back="sectionExplorePlan" class="skilldex-button skilldex-button-secondary">ย้อนกลับ</button>
+                    <button type="submit" class="skilldex-button skilldex-button-primary skilldex-button-submit">ส่งข้อมูล</button>
+                </div>
+            </section>
+
+             <section id="pageComplete" class="skilldex-page hidden">
+                <div class="skilldex-page-content">
+                    <svg class="skilldex-complete-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h1 class="skilldex-heading">เรียบร้อย!</h1>
+                    <p class="skilldex-text">ขอบคุณสำหรับข้อมูลครับ!<br>เรากำลังเตรียมสร้างเส้นทางอาชีพที่เป็นของคุณโดยเฉพาะ... คลิกเพื่อเริ่มต้นการเดินทางของคุณกับ SkillDex ได้เลย!</p>
+                    <!-- <a href="dashboard.html"><button type="button" id="goToDashboard" class="skilldex-button skilldex-button-primary">ไปที่หน้า Dashboard ของฉัน</button></a> -->
+                     <a href="dashboard.html" id="goToDashboard" class="skilldex-button">ไปที่หน้า Dashboard ของฉัน</a>
+                </div>
+            </section>
+
+        </form>
+    </div>
+
+        <div id="toast-container"></div>
+</body>
+<script src="assets/scripts/form.js"></script>
+</html>

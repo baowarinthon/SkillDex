@@ -1,0 +1,59 @@
+/* frontend/findcareer.css */
+
+/* ... (โค้ดเดิมทั้งหมด) ... */
+
+
+/* --- Rating Widget --- */
+.rating-widget {
+    width: 100%;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.rating-widget h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.rating-star {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    fill: var(--color-border); /* สีดาวปกติ (สีเทา) */
+    transition: fill 0.2s ease, transform 0.2s ease;
+}
+
+.rating-star:hover {
+    transform: scale(1.15);
+}
+
+/* เมื่อ hover บน container ดาวที่อยู่ก่อนหน้าดาวที่ hover จะเปลี่ยนสี */
+.rating-stars:hover .rating-star.hover {
+    fill: #FFD700; /* สีดาวตอน hover (สีทอง) */
+}
+
+/* สีของดาวที่ถูกเลือก (หลังจากคลิก) */
+.rating-stars[data-rating="1"] .rating-star:nth-child(-n+1),
+.rating-stars[data-rating="2"] .rating-star:nth-child(-n+2),
+.rating-stars[data-rating="3"] .rating-star:nth-child(-n+3),
+.rating-stars[data-rating="4"] .rating-star:nth-child(-n+4),
+.rating-stars[data-rating="5"] .rating-star:nth-child(-n+5) {
+    fill: #FFC107; /* สีดาวที่ถูกเลือก (สีเหลืองเข้ม) */
+}
+
+
+#rating-thank-you p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-success);
+}

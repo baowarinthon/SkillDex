@@ -1,0 +1,735 @@
+/* --- CSS Variables & Global Styles --- */
+:root {
+    --font-primary: 'Sarabun', sans-serif;
+    --color-primary: #4f46e5;
+    --color-primary-light: #eef2ff; 
+    --color-primary-dark: #4338ca; 
+    --color-secondary: #e5e7eb; 
+    --color-secondary-dark: #d1d5db;
+    --color-success: #16a34a; 
+    --color-text-primary: #1f2937;
+    --color-text-secondary: #6b7280; 
+    --color-text-label: #374151; 
+    --color-border: #d1d5db; 
+    --color-background: #f9fafb; 
+    --color-white: #ffffff;
+    --color-error: #dc2626; 
+    --border-radius: 8px;
+    --transition-speed: 200ms;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.skilldex-form-body {
+    display: flex;
+    background-color: var(--color-primary-light-4);
+    font-size: 20px;
+}
+
+.skilldex-form-decorate{
+    aspect-ratio: 3.1 / 5;
+    height: 100vh;
+    background: var(--color-primary);
+    position: sticky;
+    top: 0;
+    padding: 10px;
+    box-sizing: border-box;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+/* --- Layout & Container --- */
+.skilldex-container {
+    flex: 1;
+    margin: 0 auto;
+}
+
+#pageWelcome{
+        margin-top: -100px;
+
+        img{
+            height: 40vh;
+            mix-blend-mode: multiply;
+        }
+}
+
+.skilldex-form {
+    margin: 160px 80px 60px;
+}
+
+.skilldex-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.skilldex-grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.skilldex-flex {
+    display: flex;
+    gap: 1rem;
+}
+
+.skilldex-flex-1 {
+    flex: 1 1 0%;
+}
+/* --- Typography --- */
+.skilldex-heading {
+    color: var(--color-dark-2, #131E4D);
+text-align: center;
+font-family: "Proxima Nova Thai";
+font-size: 48px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.skilldex-text {
+    color: var(--color-tone-4, #768CA7);
+text-align: center;
+font-family: "Proxima Nova Thai";
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 28px */
+}
+
+.skilldex-page-content{
+    .skilldex-text{
+        margin-top: 12px;
+        margin-bottom: 54px;
+    }
+
+    .skilldex-heading{
+        margin-top: 40px;
+    }
+}
+
+.skilldex-text-sm {
+    font-size: 0.875rem; /* 14px */
+    margin-bottom: 0.5rem;
+}
+
+.skilldex-section-heading {
+    color: var(--color-dark-2, #131E4D);
+font-family: "Proxima Nova Thai";
+font-size: 48px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.skilldex-section-text {
+    color: rgba(19, 30, 77, 0.50);
+font-family: "Proxima Nova Thai";
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 28px */
+margin-bottom: 48px;
+display: block;
+}
+
+.skilldex-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--color-text-label);
+}
+
+.skilldex-label.required::after {
+    content: "*";
+    color: var(--color-error);
+    margin-left: 0.1rem;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.skilldex-label-bold {
+    font-weight: 700;
+}
+
+.skilldex-text-center {
+    text-align: center;
+}
+
+/* --- Form Elements --- */
+.skilldex-form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.skilldex-input,
+.skilldex-select,
+.skilldex-textarea {
+    border: 0px solid var(--color-border);
+    outline: 0px solid var(--color-primary-light-2, #BCDAFF);
+    transition: all var(--transition-speed) ease-in-out;
+    font-size: 20px;
+    border-radius: 8px;
+    background: var(--color-tone-1, #E6ECF3);
+    display: flex;
+padding: 16px 20px 12px 20px;
+align-items: center;
+align-self: stretch;
+}
+
+.skilldex-input:focus,
+.skilldex-select:focus,
+.skilldex-textarea:focus {
+    border-radius: 8px;
+outline: 4px solid var(--color-primary-light-2, #BCDAFF);
+background: var(--color-tone-1, #E6ECF3);
+}
+
+.skilldex-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+.skilldex-input-description {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.25rem;
+}
+
+.skilldex-input-other {
+    margin-top: 0.5rem;
+}
+
+/* --- Buttons --- */
+.skilldex-button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+}
+
+.skilldex-button {
+    color: var(--color-primary-light-4, #F9FBFF);
+text-align: center;
+font-family: "Proxima Nova Thai";
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 28.8px */
+display: inline-flex;
+padding: 16px 32px 12px 32px;
+justify-content: flex-end;
+align-items: flex-start;
+gap: 10px;
+border-radius: var(--border-radius-meium, 8px);
+background: var(--color-primary, #5372FE);
+}
+
+.skilldex-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
+}
+
+.skilldex-button-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    cursor: pointer;
+}
+
+.skilldex-button-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+
+.skilldex-button-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-primary);
+    cursor: pointer;
+}
+
+.skilldex-button-secondary:hover {
+    background-color: var(--color-secondary-dark);
+}
+
+.skilldex-button-submit {
+    background-color: var(--color-success);
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: .2s;
+}
+
+.skilldex-button-submit:hover {
+    background-color: #75A44B;
+    cursor: pointer;
+    color: var(--color-text-primary);
+}
+
+.skilldex-logo-mark{
+    position: fixed;
+right: 24px;
+top: 24px;
+z-index: 9999999;
+}
+
+/* --- Progress Bar --- */
+.skilldex-progressbar-container {
+    width: 100%;
+    background-color: var(--color-tone-2);
+    margin-bottom: 2rem;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    height: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+}
+
+.skilldex-progressbar-inner {
+    background: var(--gradient-rainbow, linear-gradient(90deg, var(--color-pink, #FF70B7) 0%, var(--color-purple, #7F67D5) 33%, var(--color-primary, #5372FE) 66%, var(--color-teal, #73E1DE) 100%));
+    color: transparent;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.25rem 0;
+    line-height: 1;
+    transition: width 0.4s ease-in-out;
+    height: 8px;
+}
+
+/* --- Card Select (Radio & Checkbox) --- */
+.skilldex-hidden-radio,
+.skilldex-hidden-checkbox {
+    display: none;
+}
+
+.skilldex-card-select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+}
+
+.skilldex-card-option,
+.skilldex-checkbox-card {
+    padding: 2rem;
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease-in-out;
+    background-color: var(--color-white);
+    border: 0;
+
+    display: flex;
+padding: 36px;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 8px;
+align-self: stretch;
+border-radius: 8px;
+background: var(--color-tone-1, #E6ECF3);
+border: 3px solid transparent;
+}
+
+.skilldex-card-option:hover,
+.skilldex-checkbox-card:hover {
+    border-color: var(--color-primary-light-2);
+    background-color: var(--color-primary-light);
+}
+
+.skilldex-hidden-radio:checked + .skilldex-card-option,
+.skilldex-hidden-checkbox:checked + .skilldex-checkbox-card {
+    background-color: var(--color-primary-light);
+    /* box-shadow: 0 0 0 2px var(--color-primary); */
+    border-radius: 8px;
+border: 3px solid var(--color-primary-light-1, #89B0FF);
+background: var(--color-primary-light-3, #E8F2FE);
+}
+
+.skilldex-card-heading {
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.skilldex-card-text {
+    color: var(--color-text-secondary);
+}
+
+/* --- Autocomplete & Tag Input --- */
+.skilldex-autocomplete-container {
+    position: relative;
+}
+
+.skilldex-autocomplete-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.skilldex-autocomplete-suggestions div {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+}
+
+.skilldex-autocomplete-suggestions div:hover {
+    background-color: var(--color-primary-light);
+}
+
+.skilldex-tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    /* border: 1px solid var(--color-border);
+    border-radius: var(--border-radius); */
+    min-height: 46px;
+    align-items: center;
+    transition: all var(--transition-speed) ease-in-out;
+    border-radius: 8px;
+background: var(--color-tone-1, #E6ECF3);
+display: flex;
+/* height: 52px; */
+padding: 16px 20px 12px 20px;
+align-items: center;
+align-self: stretch;
+color: rgba(19, 30, 77, 0.50);
+outline: 0px solid var(--color-primary-light-2, #BCDAFF);
+}
+
+.skilldex-tag-container:focus-within {
+    outline: 4px solid var(--color-primary-light-2, #BCDAFF);
+}
+
+.skilldex-tag-container input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 0.25rem;
+    background-color: transparent;
+font-family: "Proxima Nova Thai";
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; /* 24px */
+}
+
+.skilldex-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-primary-light);
+    color: #3730a3; /* indigo-800 */
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding-left: 0.75rem;
+    padding-right: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-radius: 9999px;
+        background-color: var(--color-background);
+    color: var(--color-dark-1);
+    font-size: 20px;
+}
+
+.skilldex-tag button {
+    margin-left: 0.25rem;
+    color: var(--color-primary);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.skilldex-tag button:hover {
+    background-color: #c7d2fe; /* indigo-200 */
+    color: var(--color-primary-dark);
+}
+
+/* --- Specific Sections --- */
+.skilldex-student-fields,
+.skilldex-employee-fields,
+.skilldex-set {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* border-top: 1px solid var(--color-border); */
+    /* padding-top: 1.5rem; */
+}
+
+.skilldex-skill-levels {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.skilldex-skill-level-item {
+    padding: 24px;
+    display: flex
+;
+    border-radius: var(--border-radius);
+    background-color: var(--color-tone-1);
+}
+
+.skilldex-skill-name {
+    font-weight: 500;
+}
+
+.skilldex-skill-radios {
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+.skilldex-skill-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 20px;
+    color: var(--color-text-secondary);
+}
+
+.skilldex-skill-radio {
+    margin: 0;
+}
+
+.skilldex-page {
+    text-align: center;
+}
+
+.skilldex-complete-icon {
+    width: 4rem; /* 64px */
+    height: 4rem;
+    color: var(--color-success);
+    margin: 0 auto 1rem;
+}
+
+/* --- Utilities & States --- */
+.skilldex-error-message {
+    font-size: 0.875rem;
+    color: var(--color-error);
+}
+
+.skilldex-space-y-4 > * + * {
+    margin-top: 1rem;
+}
+
+/* --- Validation States --- */
+.validation-message {
+    display: none;
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    bottom: -1.2rem;
+    left: 0;
+}
+
+.skilldex-button-primary:disabled {
+    background-color: var(--color-secondary);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.skilldex-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.skilldex-input-wrapper input{
+    width: 100%;
+}
+
+/* --- ADDED FOR ERROR BORDER --- */
+.input-error {
+    border-color: var(--color-error) !important;
+    outline: 3px solid #ec665dbf;
+    background: #ec665d26;
+}
+
+.skilldex-card-select-group.input-error .skilldex-card-option,
+.skilldex-form-group.input-error .skilldex-card-option {
+     border-color: var(--color-error) !important;
+}
+
+/* --- Toast Notification Styles --- */
+#toast-container {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: clamp(280px, 90vw, 350px);
+}
+
+.toast {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Modifier for success state */
+.toast.success {
+    background-color: #22c55e; /* Green-500 */
+}
+
+/* Modifier for error state */
+.toast.error {
+    background-color: #ef4444; /* Red-500 */
+}
+
+/* Keyframe animation for toast sliding in */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Keyframe animation for toast fading out */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+#sectionAbout, #sectionCareerCompass, #sectionExplorePlan, #sectionSkillInventory{
+    position: relative;
+}
+
+#sectionAbout::before, #sectionCareerCompass::before, #sectionExplorePlan::before, #sectionSkillInventory::before{
+    width: 611px;
+    height: 58.014px;
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+#sectionAbout::before{
+    content: url("assets/images/section1.svg");
+}
+
+#sectionCareerCompass::before{
+    content: url("assets/images/section2.svg");
+}
+
+#sectionExplorePlan::before{
+    content: url("assets/images/section3.svg");
+}
+
+#sectionSkillInventory::before{
+    content: url("assets/images/section4.svg");
+}
+
+
+@media (min-width: 768px) {
+    .skilldex-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .skilldex-grid2 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1300px) {
+    .skilldex-grid2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1000px) {
+    .skilldex-grid2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .skilldex-form-body{
+        display: block;
+    }
+    .skilldex-form-decorate{
+        display: none;
+    }
+    .skilldex-grid2{
+        display: flex;
+        flex-direction: column;
+    }
+    .skilldex-form{
+        margin: 120px 20px 40px;
+    }
+    .skilldex-skill-level-item, .skilldex-skill-radios{
+        flex-direction: column;
+    }
+    .skilldex-skill-radios{
+        margin-top: 12px
+    }
+
+    #sectionAbout::before, #sectionCareerCompass::before, #sectionExplorePlan::before, #sectionSkillInventory::before{
+        width: fit-content;
+        scale: 1.25;
+        margin-top: 40px;
+    }
+
+    #sectionAbout::before{
+            content: url(assets/images/section1-mobile.svg);    
+    }
+
+    #sectionCareerCompass::before{
+            content: url(assets/images/section2-mobile.svg);    
+    }
+
+    #sectionExplorePlan::before{
+            content: url(assets/images/section3-mobile.svg);    
+    }
+
+    #sectionSkillInventory::before{
+            content: url(assets/images/section4-mobile.svg);    
+    }
+}
+

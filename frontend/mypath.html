@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDex - แผนที่เส้นทางอาชีพ</title>
+    <link rel="stylesheet" href="mypath.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="gradient-header"></div>
+    <header class="result-header">
+        <nav>
+            <a href="index.html"><div class="logo">
+                <img src="assets/images/logo.svg" alt="SkillDex Logo">
+            </div></a>
+<svg xmlns="http://www.w3.org/2000/svg" width="4" height="12" viewBox="0 0 4 12" fill="none">
+                <path d="M4 12H3.99707C3.99771 11.9792 4 11.9584 4 11.9375C4 10.8329 3.10457 9.9375 2 9.9375C0.89543 9.9375 0 10.8329 0 11.9375C0 11.9584 0.00229134 11.9792 0.00292969 12H0V0H0.00292969C0.0359794 1.07562 0.916361 1.9375 2 1.9375C3.08364 1.9375 3.96402 1.07562 3.99707 0H4V12Z" fill="#F9FBFF" fill-opacity="0.75"/>
+            </svg>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">กลับแดชบอร์ด</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        
+        <div id="loading-state" class="state-container">
+            <div class="loading-animation">
+                <div class="spinner"></div>
+            </div>
+            <h1 class="loading-title">AI กำลังสร้างแผนที่อาชีพสำหรับคุณ...</h1>
+            <div class="loading-process">
+                <div class="dot-flashing"></div>
+                <p id="loading-process-text">กำลังเริ่มต้น...</p>
+            </div>
+        </div>
+        <div id="result-state" class="state-container hidden">
+            
+            <div class="result-header">
+                <div class="flex">
+                <img src="assets/images/skilldy.svg" alt="" class="ai-avatar">
+                <div class="ai-greeting">
+                    <div class="mobile">
+                        <img src="assets/images/skilldy-sent.svg" alt="">
+                    </div>
+                    <div id="ai-introduction"></div>
+                </div>
+                </div>
+                <h1>เปรียบเทียบ 3 เส้นทางสู่เป้าหมาย</h1>
+            </div>
+
+            <div class="path-container">
+                <div id="path-tabs" class="path-tabs">
+                    </div>
+                <div id="path-contents" class="path-contents">
+                    </div>
+            </div>
+
+            <footer class="result-footer">
+                <a href="dashboard.html" class="back-button">กลับไปที่ Dashboard</a>
+            </footer>
+        </div>
+    </div>
+
+    <script src="mypath.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="mypathGSAP.js"></script>
+
+    
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDex - แผนที่เส้นทางอาชีพ</title>
+    <link rel="stylesheet" href="mypath.css">
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <div id="loading-state" class="state-container">
+            <div class="loading-animation">
+                <div class="spinner"></div>
+            </div>
+            <h1 class="loading-title">AI กำลังสร้างแผนที่อาชีพสำหรับคุณ...</h1>
+<div class="loading-process">
+    <div class="dot-flashing"></div>
+    <p id="loading-process-text">กำลังเริ่มต้น...</p>
+</div>
+        </div>
+
+        <div id="result-state" class="state-container hidden">
+            
+            <header class="result-header">
+                <p id="ai-introduction" class="ai-introduction"></p>
+                <h1>เปรียบเทียบ 3 เส้นทางสู่เป้าหมาย</h1>
+            </header>
+
+            <div class="path-container">
+
+                <div id="path-tabs" class="path-tabs">
+                    <button class="tab-button active" data-target="path-1">
+                        <span class="tab-rank">เส้นทางที่ 1</span>
+                        <span class="tab-title">UX/UI Designer</span>
+                    </button>
+                    <button class="tab-button" data-target="path-2">
+                        <span class="tab-rank">เส้นทางที่ 2</span>
+                        <span class="tab-title">Frontend Developer</span>
+                    </button>
+                    <button class="tab-button" data-target="path-3">
+                        <span class="tab-rank">เส้นทางที่ 3</span>
+                        <span class="tab-title">Product Owner</span>
+                    </button>
+                </div>
+
+                <div id="path-contents" class="path-contents">
+
+                    <div id="path-1" class="tab-content active">
+                        
+                        <div class="analysis-grid">
+                            <div class="analysis-card pros">
+                                <h4>ข้อดี / โอกาสสำหรับคุณ</h4>
+                                <ul>
+                                    <li>ต่อยอดจากทักษะ Figma ที่คุณมีอยู่แล้วได้ดีที่สุด</li>
+                                    <li>ได้ใช้ความคิดสร้างสรรค์และการแก้ปัญหาอย่างเต็มที่</li>
+                                </ul>
+                            </div>
+                            <div class="analysis-card cons">
+                                <h4>ความท้าทาย / สิ่งที่ต้องพิจารณา</h4>
+                                <ul>
+                                    <li>ต้องเรียนรู้เรื่องการทำ User Research เพิ่มเติม</li>
+                                    <li>การแข่งขันในตลาดค่อนข้างสูง ต้องมี Portfolio ที่โดดเด่น</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="market-data-grid">
+                             <div class="market-data-item">
+                                <span class="data-label">เงินเดือนเริ่มต้น (กทม.)</span>
+                                <span class="data-value">25,000 - 40,000 บาท</span>
+                            </div>
+                            <div class="market-data-item">
+                                <span class="data-label">แนวโน้มตลาด</span>
+                                <span class="data-value trend-high">เติบโตสูง</span>
+                            </div>
+                        </div>
+
+                        <div class="roadmap-timeline">
+                            <div class="phase-container">
+                                <div class="phase-header">
+                                    <div class="phase-icon">1</div>
+                                    <div class="phase-title">
+                                        <h4>Phase 1: ปูพื้นฐานให้แน่น (0-3 เดือน)</h4>
+                                        <p>ในเฟสนี้เราจะเน้นไปที่การทำความเข้าใจเครื่องมือและหลักการที่จำเป็นที่สุด</p>
+                                    </div>
+                                </div>
+                                <div class="milestone-list">
+                                    <div class="milestone-card">
+                                        <h5>ฝึกฝน Figma ให้คล่องแคล่ว</h5>
+                                        <p>ต่อยอดจากระดับ 'ใช้งานได้' ไปสู่การสร้าง Interactive Prototype และ Design System เบื้องต้น</p>
+                                        <div class="resource-tags">
+                                            <span>#คอร์สออนไลน์</span>
+                                            <span>#UI Challenge</span>
+                                        </div>
+                                    </div>
+                                    <div class="milestone-card">
+                                        <h5>เรียนรู้หลักการออกแบบ (UX Principles)</h5>
+                                        <p>ทำความเข้าใจหลักการพื้นฐาน เช่น Usability Heuristics เพื่อให้การออกแบบของคุณมีหลักการรองรับ</p>
+                                        <div class="resource-tags">
+                                            <span>#บทความ</span>
+                                            <span>#หนังสือ</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+                    </div>
+                    </div>
+
+            </div>
+
+            <footer class="result-footer">
+                <a href="findcarrier.html" class="back-button">ย้อนกลับไปดูผลวิเคราะห์</a>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <script src="mypath.js"></script>
+</body>
+</html> -->

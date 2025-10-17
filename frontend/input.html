@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDex - Pre-Onboarding</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/iku2alf.css">
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+
+    <div class="max-w-3xl mx-auto my-10 p-6 sm:p-8 bg-white rounded-xl shadow-lg">
+        
+        <div id="welcome-header" class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Welcome to SkillDex!</h1>
+            <p class="text-gray-600 mt-2">แบบสอบถามนี้จะใช้เวลาประมาณ 5 นาที เพื่อให้ AI แนะนำเส้นทางที่ใช่สำหรับคุณ</p>
+        </div>
+
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-8">
+            <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+
+        <form id="onboarding-form">
+
+            <section id="page-1" class="form-page active">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-700">ส่วนที่ 1: เกี่ยวกับคุณ (About You)</h2>
+                    <p class="text-gray-500 mt-1">มาเริ่มทำความรู้จักกันก่อนนะครับ</p>
+                </div>
+                <fieldset class="space-y-6">
+                    <div>
+                        <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900">ชื่อ-นามสกุล</label>
+                        <input type="text" id="fullname" name="fullname" class="form-input" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">อีเมล</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    <div>
+                        <label for="current-status" class="block mb-2 text-sm font-medium text-gray-900">สถานะปัจจุบันของคุณ</label>
+                        <select id="current-status" name="current_status" class="form-input">
+                            <option value="">-- กรุณาเลือก --</option>
+                            <option value="student">นักเรียน/นักศึกษา</option>
+                            <option value="job_seeker">จบการศึกษาแล้ว (กำลังหางาน)</option>
+                            <option value="employed">ทำงานแล้ว</option>
+                            <option value="freelance">ฟรีแลนซ์ / เจ้าของกิจการ</option>
+                            <option value="self_learner">กำลังเรียนรู้ด้วยตัวเอง / เปลี่ยนสายงาน</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <div id="student-info" class="conditional-field hidden mt-6">
+                    <fieldset class="border-t border-gray-200 pt-6">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="university" class="block mb-2 text-sm font-medium text-gray-900">สถาบัน/มหาวิทยาลัย</label>
+                                <input type="text" id="university" name="university" class="form-input autoComplete" placeholder="พิมพ์เพื่อค้นหา...">
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="faculty" class="block mb-2 text-sm font-medium text-gray-900">คณะ</label>
+                                    <input type="text" id="faculty" name="faculty" class="form-input autoComplete" placeholder="เช่น วิศวกรรมศาสตร์">
+                                </div>
+                                <div>
+                                    <label for="major" class="block mb-2 text-sm font-medium text-gray-900">สาขา/หลักสูตร</label>
+                                    <input type="text" id="major" name="major" class="form-input autoComplete" placeholder="เช่น วิศวกรรมคอมพิวเตอร์">
+                                </div>
+                            </div>
+                             <div>
+                                <label for="student-year" class="block mb-2 text-sm font-medium text-gray-900">ชั้นปี</label>
+                                <select id="student-year" name="student_year" class="form-input">
+                                    <option value="1">ปี 1</option><option value="2">ปี 2</option><option value="3">ปี 3</option><option value="4">ปี 4</option><option value="postgrad">สูงกว่าปริญญาตรี</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="major-details" class="block mb-2 text-sm font-medium text-gray-900">
+                                    ข้อมูลเกี่ยวกับสาขาที่เรียน 
+                                    <span class="text-gray-500 font-normal">(วิชาที่ชอบ, โปรเจกต์ที่เคยทำ)</span>
+                                </label>
+                                <textarea id="major-details" name="major_details" class="form-input" rows="3" placeholder="เช่น ชอบเรียนวิชาเกี่ยวกับ AI, เคยทำโปรเจกต์วิเคราะห์ข้อมูลการตลาดด้วย Python..."></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div id="worker-info" class="conditional-field hidden mt-6">
+                     <fieldset class="border-t border-gray-200 pt-6">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="current-role" class="block mb-2 text-sm font-medium text-gray-900">ตำแหน่งงานปัจจุบัน</label>
+                                <input type="text" id="current-role" name="current_role" class="form-input autoComplete" placeholder="เช่น Software Engineer">
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="industry" class="block mb-2 text-sm font-medium text-gray-900">ประเภทอุตสาหกรรม</label>
+                                    <select id="industry" name="industry" class="form-input"></select> 
+                                </div>
+                                <div>
+                                    <label for="work-exp" class="block mb-2 text-sm font-medium text-gray-900">ประสบการณ์ทำงาน</label>
+                                    <select id="work-exp" name="work_exp" class="form-input">
+                                        <option value="0-1">น้อยกว่า 1 ปี</option><option value="1-3">1-3 ปี</option><option value="3-5">3-5 ปี</option><option value="5+">5 ปีขึ้นไป</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <button type="button" class="start-btn next-btn">เริ่มกันเลย &rarr;</button>
+                </div>
+            </section>
+            
+            <section id="page-2" class="form-page hidden">
+                 <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700">ส่วนที่ 2: เข็มทิศเส้นทางอาชีพ</h2>
+                    <p class="text-gray-500 mt-1">คำตอบของคุณจะช่วยให้เราเลือกคำถามที่เหมาะสมที่สุด</p>
+                </div>
+                <div class="space-y-4">
+                    <label>
+                        <input type="radio" name="clarity" value="A" class="hidden peer">
+                        <div class="p-5 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-200 transition-all">
+                            <h3 class="font-semibold text-lg text-gray-800">ยังไม่แน่ใจเลย</h3>
+                            <p class="text-gray-600 text-sm">ว่าอยากทำอาชีพอะไร กำลังค้นหาตัวเองอยู่</p>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="clarity" value="B" class="hidden peer">
+                         <div class="p-5 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-200 transition-all">
+                            <h3 class="font-semibold text-lg text-gray-800">มีที่สนใจอยู่บ้าง</h3>
+                            <p class="text-gray-600 text-sm">แต่มีหลายทางเลือกและยังตัดสินใจไม่ได้</p>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="clarity" value="C" class="hidden peer">
+                         <div class="p-5 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-200 transition-all">
+                            <h3 class="font-semibold text-lg text-gray-800">มีเป้าหมายชัดเจนแล้ว</h3>
+                            <p class="text-gray-600 text-sm">และต้องการแผนพัฒนาตัวเองให้ไปถึงเป้าหมาย</p>
+                        </div>
+                    </label>
+                </div>
+                <div class="flex justify-between mt-8">
+                    <button type="button" class="back-btn">&larr; ย้อนกลับ</button>
+                    <button type="button" class="next-btn">ถัดไป &rarr;</button>
+                </div>
+            </section>
+
+            <section id="page-3" class="form-page hidden">
+                <div class="text-center mb-8">
+                   <h2 class="text-2xl font-semibold text-gray-700">ส่วนที่ 3: สำรวจและวางแผน</h2>
+               </div>
+               
+               <div id="page-3-content-container">
+                   </div>
+
+               <div class="flex justify-between mt-8">
+                   <button type="button" class="back-btn">&larr; ย้อนกลับ</button>
+                   <button type="button" class="next-btn">ถัดไป &rarr;</button>
+               </div>
+           </section>
+
+           <section id="page-4" class="form-page hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700">ส่วนที่ 4: คลังทักษะและประสบการณ์</h2>
+                    <p class="text-gray-500 mt-1">ส่วนสุดท้ายแล้วครับ! บอกให้เรารู้หน่อยว่าคุณมีทักษะอะไรบ้าง</p>
+                </div>
+                <fieldset class="space-y-6">
+                    <div>
+                        <label for="hard-skills" class="block mb-2 text-sm font-medium text-gray-900">ทักษะเฉพาะทาง (Hard Skills) ที่คุณมี</label>
+                        <input type="text" id="hard-skills" name="hard_skills" class="form-input" placeholder="พิมพ์ทักษะแล้วกด Enter เพื่อเพิ่ม Tag...">
+                        <div id="hard-skills-tags" class="mt-2 flex flex-wrap gap-2"></div>
+                        <div id="skill-ratings-container" class="mt-4 space-y-2"></div>
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">ทักษะทั่วไป (Soft Skills) ที่คุณคิดว่าเป็นจุดแข็ง (เลือกสูงสุด 5 ข้อ)</label>
+                        <div id="soft-skills-container" class="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                            </div>
+                    </div>
+                     <div>
+                        <label for="experience" class="block mb-2 text-sm font-medium text-gray-900">(ไม่บังคับ) เล่าประสบการณ์ฝึกงาน, โปรเจกต์ หรือกิจกรรมที่โดดเด่นสั้นๆ</label>
+                        <textarea id="experience" name="experience" rows="4" class="form-input"></textarea>
+                    </div>
+                </fieldset>
+                <div class="flex justify-between mt-8">
+                    <button type="button" class="back-btn">&larr; ย้อนกลับ</button>
+                    <button type="submit" class="submit-btn">ดูผลการวิเคราะห์</button>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
+    <script src="assets/scripts/input.js"></script>
+</body>
+</html>

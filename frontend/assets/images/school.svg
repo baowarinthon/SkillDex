@@ -1,0 +1,8 @@
+<svg width="480" height="480" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_271_986" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="480" height="480">
+<rect width="480" height="480" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_271_986)">
+<path d="M240 420L100 344V224L20 180L240 60L460 180V340H420V202L380 224V344L240 420ZM240 254L377 180L240 106L103 180L240 254ZM240 374.5L340 320.5V245L240 300L140 245V320.5L240 374.5Z" fill="#F9FBFF"/>
+</g>
+</svg>

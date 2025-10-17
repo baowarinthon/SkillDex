@@ -1,0 +1,366 @@
+/* MAIN CSS */
+
+:root {
+    --color-primary: #5372FE;
+    --color-primary-light-1: #89B0FF;
+    --color-primary-light-2: #BCDAFF;
+    --color-primary-light-3: #E8F2FE;
+    --color-primary-light-4: #F9FBFF;
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 12px;
+    --color-tone-1: #E6ECF3;
+    --color-tone-2: #C5D0DD;
+    --color-tone-3: #A9B7C7;
+    --color-tone-4: #768CA7;
+    --color-dark-1: #334490;
+    --color-dark-2: #131E4D;
+    --color-pink: #FF70B7;
+    --color-teal: #73E1DE;
+    --color-purple: #7F67D5;
+    --color-purple-light: #928CFA;
+    --color-success: #A8E176;
+    --color-error: #EC665D;
+    --gradient-rainbow: linear-gradient(90deg, var(--color-pink, #FF70B7) 0%, var(--color-purple, #7F67D5) 33%, var(--color-primary, #5372FE) 66%, var(--color-teal, #73E1DE) 100%);
+}
+
+html{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+*{
+    border: 0;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Proxima Nova Thai", sans-serif;
+    line-height: 160%;
+}
+
+/* HEADER */
+
+header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+    .cta-button{
+        position: absolute;
+        right: 24px;
+        transform: none !important;
+        top: 20px;
+    }
+}
+
+nav, nav ul{
+    display: flex;
+    align-items: center;
+
+    li{
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        padding: 8px 12px 4px 12px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        border-radius: var(--border-radius-small);
+        background: rgba(249, 251, 255, 0.75);
+        backdrop-filter: blur(20px);
+        color: var(--color-dark-1);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    .logo{
+        display: flex;
+        padding: 10px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        border-radius: var(--border-radius-medium);
+        background: var(--color-primary);
+    }
+}
+
+.nav-links{
+    display: flex;
+    padding: 2px;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    gap: 2px;
+    flex-wrap: wrap;
+    border-radius: var(--border-radius-medium);
+    border: 2px solid rgba(249, 251, 255, 0.75);
+}
+
+.cta-button{
+    display: inline-flex;
+    padding: 10px 20px 6px 20px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: var(--border-radius-medium);
+    outline: 6px solid rgba(83, 114, 254, 0.25);
+    background: var(--color-primary);
+    color: var(--color-primary-light-4);
+    text-align: right;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    cursor: pointer;
+    transition: outline 0.3s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.cta-button:hover{
+    outline: 8px solid rgba(83, 114, 254, 0.25);
+}
+
+/* HERO SECTION */
+
+#heroSection{
+    height: 100vh;
+    width: 100%;
+    background: url(assets/images/top-gradient.png) no-repeat center top/100%, linear-gradient(180deg, var(--color-primary-light-3) 0%, var(--color-primary-light-4) 100%);
+    padding-top: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .cta-button{
+        padding: 16px 32px 12px 32px;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+#heroSection canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+}
+
+.hero-content {
+    position: relative;
+    color: #333;
+    padding: 20px;
+}
+
+.headline {
+    font-size: 5.5vw; /* ปรับขนาดตามความกว้างหน้าจอ */
+    display: flex; /* ทำให้ span เรียงต่อกันสวยงาม */
+    flex-wrap: wrap; /* ทำให้ขึ้นบรรทัดใหม่ได้บนจอเล็ก */
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.static-text-wrapper {
+    display: inline-block;
+    color: var(--color-dark-2);
+}
+
+.headline span {
+    display: inline-block;
+    margin: 0 6px; /* ระยะห่างระหว่างสองส่วน */
+}
+
+/* --- 💡 ส่วนสำคัญ: ครอบตัวอักษรเพื่อซ่อนส่วนเกินตอน animate --- */
+.animated-text-wrapper {
+    display: inline-block;
+    overflow: hidden; /* ซ่อนตัวอักษรตอนที่อยู่ข้างล่าง */
+    vertical-align: bottom;
+}
+
+#animated-text {
+    color: var(--color-primary);
+    font-weight: 600;
+    line-height: 140%;
+}
+
+.static-text {
+    color: var(--color-dark-2);
+    font-weight: 400;
+    animation: fadeInUp 1s cubic-bezier(1,-0.01,.49,1.03) normal forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.hero-desc-wrapper {
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.hero-desc{
+    color: var(--color-dark-2);
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 24px 0 52px;
+}
+
+#hero-desc .line-wrapper {
+    overflow: hidden;
+    display: block; /* ทำให้แต่ละบรรทัดอยู่แยกกัน */
+}
+
+@keyframes featureSlideUp {
+    from {
+        top: 0px;
+    }
+    to {
+        top: -30px;
+    }
+}
+
+#featureSection{
+    background-color: var(--color-dark-2);
+    min-height: 1vh;
+    position: relative;
+    z-index: 1;
+}
+
+#featureSection::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -30px;
+    width: 100%;
+    height: 30px;
+    background-color: var(--color-dark-2);
+    animation: featureSlideUp 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+/* นำเข้า base styles, components, และ utilities ของ Tailwind 
+  (จำเป็นเมื่อใช้ Tailwind ผ่าน PostCSS build process, 
+  แต่การมีไว้ก็ไม่เสียหายเมื่อใช้ CDN)
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* สร้าง Component Classes ของเราเองโดยใช้ @apply 
+  เพื่อทำให้โค้ดใน HTML สะอาดขึ้น
+*/
+@layer components {
+  .form-input {
+    @apply w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors;
+  }
+  .next-btn {
+    @apply px-6 py-2.5 text-sm font-medium rounded-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition-colors;
+  }
+  .back-btn {
+     @apply px-6 py-2.5 text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 transition-colors;
+  }
+  .submit-btn {
+    @apply w-full sm:w-auto px-8 py-3 text-base font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 transition-colors;
+  }
+}
+
+/*
+  ปรับแต่งสไตล์ของ Autocomplete Dropdown 
+  เพื่อให้หน้าตาเข้ากับดีไซน์ Tailwind ของเรา
+*/
+.autoComplete_wrapper > ul {
+  @apply shadow-lg border border-gray-200 rounded-lg bg-white mt-1 max-h-60 overflow-y-auto;
+}
+
+.autoComplete_wrapper > ul > li {
+  @apply px-4 py-2 cursor-pointer hover:bg-gray-100;
+}
+
+.autoComplete_wrapper > ul > li mark {
+  @apply bg-transparent text-blue-600 font-semibold;
+}
+
+.autoComplete_wrapper > ul > li[aria-selected="true"] {
+  @apply bg-blue-500 text-white;
+}
+
+.autoComplete_wrapper > ul > li[aria-selected="true"] mark {
+  @apply text-white;
+}
+
+/* คลาสสำหรับซ่อน/แสดงหน้าต่างๆ ของฟอร์ม */
+.form-page.hidden,
+.conditional-field.hidden {
+  display: none;
+}
+
+.gradient-header{
+    width: 100%;
+    position: fixed;
+    top: -100px;
+    left: 0;
+    z-index: 100;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(0deg, transparent, white);
+    transition: .1s ease-in-out;
+}
+
+.export-button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.export-button:hover {
+  background: #2563eb;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .result-state * {
+    visibility: visible;
+  }
+  .result-state {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}

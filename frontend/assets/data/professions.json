@@ -1,0 +1,12 @@
+[
+  { "name": "Software Engineer" },
+  { "name": "Data Scientist" },
+  { "name": "Data Analyst" },
+  { "name": "Data Engineer" },
+  { "name": "UX/UI Designer" },
+  { "name": "Product Manager" },
+  { "name": "Digital Marketing Specialist" },
+  { "name": "Frontend Developer" },
+  { "name": "Backend Developer" },
+  { "name": "DevOps Engineer" }
+]

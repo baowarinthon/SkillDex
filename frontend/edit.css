@@ -1,0 +1,382 @@
+/* --- CSS Variables & Global Styles (FROM form.css) --- */
+:root {
+    --font-primary: 'Sarabun', sans-serif;
+    --color-primary: #4f46e5;
+    --color-primary-light: #eef2ff;
+    --color-primary-dark: #4338ca;
+    --color-secondary: #e5e7eb;
+    --color-secondary-dark: #d1d5db;
+    --color-success: #16a34a;
+    --color-text-primary: #1f2937;
+    --color-text-secondary: #6b7280;
+    --color-text-label: #374151;
+    --color-border: #d1d5db;
+    --color-background: #f9fafb;
+    --color-white: #ffffff;
+    --color-error: #dc2626;
+    --border-radius: 0.5rem;
+    --transition-speed: 200ms;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.skilldex-body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    margin: 0;
+    padding: 1rem;
+}
+
+/* --- Layout & Container (FROM form.css) --- */
+.skilldex-container {
+    max-width: 56rem; /* equivalent to max-w-3xl */
+    margin: 0 auto;
+}
+
+.skilldex-form {
+    background-color: var(--color-white);
+    padding: 2rem 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+
+/* --- HIDE Original Progress Bar --- */
+.skilldex-progressbar-container {
+    display: none;
+}
+
+/* --- NEW Navigation Bar Styles --- */
+.skilldex-nav-bar {
+    background-color: #fff;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+
+.skilldex-nav-button {
+    padding: 1rem 1.5rem;
+    border: none;
+    background: none;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    position: relative;
+    border-bottom: 3px solid transparent;
+    transition: color 200ms, border-color 200ms;
+}
+
+.skilldex-nav-button:hover {
+    color: var(--color-text-primary);
+}
+
+.skilldex-nav-button.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+
+/* --- ALL OTHER STYLES (FROM form.css) --- */
+.skilldex-page {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.skilldex-heading {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.skilldex-text {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 2rem 0;
+}
+
+.skilldex-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.skilldex-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-label);
+    margin-bottom: 0.5rem;
+}
+
+.skilldex-input, .skilldex-select, .skilldex-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-white);
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.skilldex-input:focus, .skilldex-select:focus, .skilldex-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.skilldex-radio-group, .skilldex-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.skilldex-radio-group.vertical {
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skilldex-radio-label, .skilldex-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed);
+}
+
+.skilldex-radio-label:has(input:checked), .skilldex-checkbox-label:has(input:checked) {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+.skilldex-checkbox-label:has(input:disabled) {
+    background-color: var(--color-background);
+    color: var(--color-text-secondary);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--color-primary);
+}
+
+.skilldex-button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.skilldex-button {
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.skilldex-button-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.skilldex-button-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.skilldex-button-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-primary);
+}
+
+.skilldex-button-secondary:hover {
+    background-color: var(--color-secondary-dark);
+}
+
+.skilldex-tag-input-wrapper {
+    position: relative;
+}
+
+.skilldex-tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+.skilldex-tag-container:focus-within {
+     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.skilldex-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+}
+
+.skilldex-tag button {
+    border: none;
+    background: none;
+    color: var(--color-white);
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity var(--transition-speed);
+    padding: 0 0 0 0.25rem;
+}
+.skilldex-tag button:hover {
+    opacity: 1;
+}
+
+.skilldex-tag-container input {
+    flex: 1;
+    min-width: 150px;
+    border: none;
+    outline: none;
+    padding: 0.25rem;
+    background: transparent;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.skilldex-skill-level-item {
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.skilldex-skill-name {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.skilldex-skill-radios {
+    display: flex;
+    justify-content: space-around;
+}
+
+.skilldex-skill-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.file-upload-wrapper .file-upload-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding-left: 1rem;
+    cursor: pointer;
+}
+.file-upload-wrapper .file-name.placeholder {
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+.file-upload-wrapper .file-upload-button {
+    background-color: var(--color-secondary);
+    padding: 0.75rem 1.5rem;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.validation-message {
+    display: none;
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* --- Toast Notification Styles --- */
+#toast-container {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: clamp(280px, 90vw, 350px);
+}
+
+.toast {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Modifier for success state */
+.toast.success {
+    background-color: #22c55e; /* Green-500 */
+}
+
+/* Modifier for error state */
+.toast.error {
+    background-color: #ef4444; /* Red-500 */
+}
+
+/* Keyframe animation for toast sliding in */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Keyframe animation for toast fading out */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

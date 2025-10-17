@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDex - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/iku2alf.css">
+</head>
+<body class="dashboard-body">
+    <!-- <header class="dashboard-header">
+        <div class="header-content">
+            <h1 class="logo">SkillDex</h1>
+            <div class="user-profile">
+                <span class="user-name" id="userName">กำลังโหลด...</span>
+                <span class="material-icons-outlin≈ed user-icon">account_circle</span>
+            </div>
+        </div>
+    </header> -->
+    
+    <div class="gradient-header"></div>
+    <header>
+        <nav>
+            <a href="index.html"><div class="logo">
+                <img src="assets/images/logo.svg" alt="SkillDex Logo">
+            </div></a>
+
+            <div class="user-profile">
+                <span class="user-name" id="userName">กำลังโหลด...</span>
+                <img src="assets/images/profile.svg" alt="">
+            </div>
+        </nav>
+    </header>
+    <main class="dashboard-main">
+
+        <h1>ข้อมูลของคุณพร้อมแล้ว!</h1>
+        <p>คลิกที่ฟีเจอร์ เพื่อให้ AI ของเราประมวลผลในแต่ละหัวข้อที่คุณสนใจ</p>
+
+        <section class="feature-section">
+            <div class="feature-grid">
+                <div class="feature-card" id="cpCard">
+                    <div class="feature-content">
+                        <div class="feature-icon"></div>
+                    <h3>Find My <br> Carrier</h3>
+                    <p>ค้นหาเส้นทางอาชีพที่ใช่สำหรับคุณ  <br> จากข้อมูลและทักษะที่คุณมี</p>
+                    <a href="findcareer.html" class="action-button">ค้นหาเลย</a>
+                    </div>
+                </div>
+
+                <div class="feature-card" id="mpCard">
+                    <div class="feature-content">
+                        <div class="feature-icon"></div>
+                    <h3>Build <br> My Path</h3>
+                    <p>สร้างแผนการเดินทางในสายอาชีพที่คุณเลือก พร้อมไทม์ไลน์และเป้าหมาย</p>
+                    <a href="mypath.html" class="action-button">สร้างแผนการ</a>
+                    </div>
+                </div>
+
+                <div class="feature-card" id="usCard">
+                    <div class="feature-content">
+                        <div class="feature-icon"></div>
+                    <h3>Upskill Guide</h3>
+                    <p>แนะนำทักษะที่ต้องเรียนรู้เพิ่มเติม พร้อมคอร์สเรียนและแหล่งข้อมูล</p>
+                    <a href="upskill.html" class="action-button">ดูคำแนะนำ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="summary-section">
+            <div class="summary-header">
+                <h2>สรุปข้อมูลของคุณ</h2>
+                <div class="header-actions">
+                     <button id="editDataBtn" class="action-link">
+    <span class="material-icons-outlined">edit</span>
+    แก้ไขข้อมูล
+</button>
+                    <button id="resetDataBtn" class="action-link action-link-danger">
+                        <span class="material-icons-outlined">delete_sweep</span>
+                        ล้างข้อมูลทั้งหมด
+                    </button>
+                </div>
+            </div>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h4>เกี่ยวกับคุณ</h4>
+                    <div id="summaryAbout">
+                        </div>
+                </div>
+
+                <div class="summary-card">
+                    <h4>เข็มทิศเส้นทางอาชีพ</h4>
+                    <div id="summaryCareerCompass">
+                        </div>
+                </div>
+
+                <div class="summary-card full-width">
+                    <h4>ทักษะ (Hard Skills)</h4>
+                    <div id="summaryHardSkills" class="skills-container">
+                        </div>
+                </div>
+                
+                <div class="summary-card">
+                    <h4>ทักษะ (Soft Skills)</h4>
+                    <div id="summarySoftSkills">
+                        </div>
+                </div>
+
+                <div class="summary-card">
+                    <h4>ประสบการณ์และโปรเจกต์</h4>
+                    <div id="summaryExperience">
+                         </div>
+                </div>
+
+                 <div class="summary-card full-width">
+                    <h4>ไฟล์แนบ (Resume/CV)</h4>
+                    <div id="summaryResume">
+                         </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="dashboardGSAP.js"></script>
+
+    <script src="dashboard.js"></script>
+    <script src="assets/scripts/header.js"></script>
+</body>
+</html>

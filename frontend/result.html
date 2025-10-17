@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปข้อมูลของคุณ - SkillDex</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/iku2alf.css">
+</head>
+<body>
+    <main class="form-container">
+        <header id="result-header">
+            <h1>สรุปข้อมูลของคุณ</h1>
+            <p>กรุณาตรวจสอบข้อมูลที่กรอกก่อนสั่งให้ AI ประมวลผล</p>
+        </header>
+
+        <!-- Container สำหรับแสดงข้อมูลที่ดึงมาจาก localStorage -->
+        <div id="summary-container">
+            <p class="loading-text">กำลังโหลดข้อมูล...</p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ส่วนของปุ่มสั่งการ AI -->
+        <div id="ai-actions">
+            <h2>เลือกการวิเคราะห์โดย AI</h2>
+            <p>เลือกหัวข้อที่คุณต้องการให้ AI ช่วยวิเคราะห์จากข้อมูลของคุณ</p>
+            <div class="action-buttons-container">
+                <button id="analyze-career-btn" class="action-btn">วิเคราะห์เส้นทางอาชีพ</button>
+                <button id="analyze-skills-btn" class="action-btn">วิเคราะห์จุดแข็ง/ทักษะที่ควรเพิ่ม</button>
+                <button id="generate-plan-btn" class="action-btn">สร้างแผนพัฒนาตัวเอง</button>
+            </div>
+        </div>
+    </main>
+    <script src="assets/scripts/result.js"></script>
+</body>
+</html>

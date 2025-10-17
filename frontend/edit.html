@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDex - แก้ไขข้อมูลโปรไฟล์</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="https://use.typekit.net/iku2alf.css">
+    <style>
+        /* CSS เฉพาะสำหรับหน้านี้ */
+        .skilldex-body { background-color: #f8f9fa; }
+        .skilldex-nav {
+            background-color: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 1rem;
+            position: sticky; top: 0; z-index: 10;
+            margin-bottom: 2rem;
+        }
+        .skilldex-nav-container { display: flex; justify-content: center; gap: 1rem; }
+        .skilldex-nav-item {
+            padding: 1rem 1.5rem; border: none; background: none;
+            font-family: 'Sarabun', sans-serif; font-size: 1rem; font-weight: 500;
+            cursor: pointer; color: #6b7280; border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .skilldex-nav-item.active, .skilldex-nav-item:hover { color: #4f46e5; border-bottom-color: #4f46e5; }
+        .skilldex-form-section { padding: 2rem; background-color: #fff; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,.05); }
+        .skilldex-form-section + .skilldex-form-section { margin-top: 1.5rem; }
+        .skilldex-section-header { margin: 0 0 1.5rem 0; font-size: 1.5rem; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 1rem; }
+    </style>
+</head>
+<body class="skilldex-body">
+
+    <nav class="skilldex-nav">
+        <div class="skilldex-nav-container">
+            <button class="skilldex-nav-item active" data-target="sectionAbout">ข้อมูลส่วนตัว</button>
+            <button class="skilldex-nav-item" data-target="sectionCareer">เส้นทางอาชีพ</button>
+            <button class="skilldex-nav-item" data-target="sectionSkills">ทักษะและประสบการณ์</button>
+        </div>
+    </nav>
+
+    <div class="skilldex-container">
+        <form id="skilldexEditForm" class="skilldex-form" novalidate>
+            <section id="sectionAbout" class="skilldex-form-section">
+                <h2 class="skilldex-section-header">ข้อมูลส่วนตัว</h2>
+                <div class="skilldex-form-grid">
+                    <div class="skilldex-form-group">
+                        <label for="fullName" class="skilldex-label">ชื่อ-นามสกุล</label>
+                        <input type="text" id="fullName" name="fullName" class="skilldex-input" required>
+                    </div>
+                    <div class="skilldex-form-group">
+                        <label for="email" class="skilldex-label">อีเมล</label>
+                        <input type="email" id="email" name="email" class="skilldex-input" required>
+                    </div>
+                </div>
+                <div class="skilldex-form-group">
+                    <label class="skilldex-label">สถานะปัจจุบัน</label>
+                    <div class="skilldex-radio-group">
+                        <label><input type="radio" name="currentStatus" value="student"><span>นักศึกษา</span></label>
+                        <label><input type="radio" name="currentStatus" value="graduate"><span>บัณฑิตจบใหม่</span></label>
+                        <label><input type="radio" name="currentStatus" value="employee"><span>พนักงานบริษัท</span></label>
+                        <label><input type="radio" name="currentStatus" value="freelance"><span>ฟรีแลนซ์</span></label>
+                    </div>
+                </div>
+                <div id="studentFields" class="hidden">
+                    <div class="skilldex-form-grid">
+                         <div class="skilldex-form-group"><label for="university" class="skilldex-label">มหาวิทยาลัย</label><input type="text" id="university" name="university" class="skilldex-input"></div>
+                         <div class="skilldex-form-group"><label for="faculty" class="skilldex-label">คณะ</label><input type="text" id="faculty" name="faculty" class="skilldex-input"></div>
+                         <div class="skilldex-form-group"><label for="major" class="skilldex-label">สาขา</label><input type="text" id="major" name="major" class="skilldex-input"></div>
+                         <div class="skilldex-form-group"><label for="studyYear" class="skilldex-label">ชั้นปี</label><input type="text" id="studyYear" name="studyYear" class="skilldex-input"></div>
+                    </div>
+                </div>
+                <div id="employeeFields" class="hidden">
+                    <div class="skilldex-form-grid">
+                        <div class="skilldex-form-group"><label for="jobTitle" class="skilldex-label">ตำแหน่งงานปัจจุบัน</label><input type="text" id="jobTitle" name="jobTitle" class="skilldex-input"></div>
+                        <div class="skilldex-form-group"><label for="workExperience" class="skilldex-label">ประสบการณ์ทำงาน</label><input type="text" id="workExperience" name="workExperience" class="skilldex-input"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sectionCareer" class="skilldex-form-section">
+                <h2 class="skilldex-section-header">เข็มทิศเส้นทางอาชีพ</h2>
+                <div class="skilldex-form-group">
+                    <label class="skilldex-label">ความชัดเจนในเส้นทางอาชีพของคุณ</label>
+                    <div class="skilldex-radio-group">
+                        <label><input type="radio" name="careerClarity" value="A"><span>ยังไม่แน่ใจ</span></label>
+                        <label><input type="radio" name="careerClarity" value="B"><span>พอมีสายอาชีพที่สนใจ</span></label>
+                        <label><input type="radio" name="careerClarity" value="C"><span>มีเป้าหมายชัดเจน</span></label>
+                    </div>
+                </div>
+                <div id="exploreGroupA" class="hidden">
+                     <div class="skilldex-form-group"><label class="skilldex-label">กิจกรรมที่ชอบทำ (กด Enter เพื่อเพิ่ม)</label><div id="favoriteActivities" class="skilldex-tag-container"><input type="text" class="skilldex-tag-input" placeholder="เช่น ออกแบบ, เขียนโค้ด, วิเคราะห์ข้อมูล"></div></div>
+                </div>
+                 <div id="exploreGroupB" class="hidden">
+                     <div class="skilldex-form-group"><label class="skilldex-label">สายอาชีพที่สนใจ (กด Enter เพื่อเพิ่ม)</label><div id="interestedProfessions" class="skilldex-tag-container"><input type="text" class="skilldex-tag-input" placeholder="เช่น Data Scientist, UX/UI Designer"></div></div>
+                </div>
+                <div id="exploreGroupC" class="hidden">
+                    <div class="skilldex-form-group"><label for="targetProfession" class="skilldex-label">อาชีพเป้าหมาย</label><input type="text" id="targetProfession" name="targetProfession" class="skilldex-input"></div>
+                    <div class="skilldex-form-group"><label for="futureSkills" class="skilldex-label">ทักษะที่ต้องพัฒนาเพิ่มเติม</label><input type="text" id="futureSkills" name="futureSkills" class="skilldex-input" placeholder="ระบุทักษะที่สำคัญสำหรับอาชีพเป้าหมาย"></div>
+                </div>
+            </section>
+
+            <section id="sectionSkills" class="skilldex-form-section">
+                <h2 class="skilldex-section-header">ทักษะและประสบการณ์</h2>
+                <div class="skilldex-form-group">
+                    <label class="skilldex-label">ทักษะเฉพาะทาง (Hard Skills)</label>
+                    <div class="skilldex-skill-adder">
+                        <input type="text" id="skillName" class="skilldex-input" placeholder="เพิ่มทักษะ เช่น Python, SQL, Figma">
+                        <button type="button" id="addSkillBtn" class="skilldex-button">เพิ่ม</button>
+                    </div>
+                    <div id="skillContainer" class="skilldex-skill-list">
+                        </div>
+                </div>
+                <div class="skilldex-form-group">
+                    <label class="skilldex-label">ทักษะทั่วไป (Soft Skills) - เลือกได้สูงสุด 5 ข้อ</label>
+                    <div class="skilldex-checkbox-group" data-limit="5">
+                        <label class="skilldex-checkbox-label"><input type="checkbox" name="softSkills" value="problem_solving"><span>การแก้ปัญหา</span></label>
+                        <label class="skilldex-checkbox-label"><input type="checkbox" name="softSkills" value="communication"><span>การสื่อสาร</span></label>
+                        <label class="skilldex-checkbox-label"><input type="checkbox" name="softSkills" value="teamwork"><span>การทำงานเป็นทีม</span></label>
+                        <label class="skilldex-checkbox-label"><input type="checkbox" name="softSkills" value="leadership"><span>ความเป็นผู้นำ</span></label>
+                        <label class="skilldex-checkbox-label"><input type="checkbox" name="softSkills" value="adaptability"><span>การปรับตัว</span></label>
+                         <label class="skilldex-checkbox-label"><input type="checkbox" name="softSkills" value="creativity"><span>ความคิดสร้างสรรค์</span></label>
+                         <label class="skilldex-checkbox-label"><input type="checkbox" name="softSkills" value="time_management"><span>การบริหารเวลา</span></label>
+                    </div>
+                </div>
+                <div class="skilldex-form-group">
+                    <label for="experience" class="skilldex-label">ประสบการณ์ / โปรเจกต์ที่โดดเด่น</label>
+                    <textarea id="experience" name="experience" rows="5" class="skilldex-textarea" placeholder="เล่าถึงโปรเจกต์ที่ภูมิใจนำเสนอ หรือประสบการณ์ที่สำคัญ..."></textarea>
+                </div>
+            </section>
+
+            <div class="skilldex-button-group" style="padding: 2rem; text-align: right;">
+                <a href="dashboard.html" class="skilldex-button skilldex-button-secondary">ยกเลิก</a>
+                <button type="submit" id="saveButton" class="skilldex-button skilldex-button-primary">บันทึกการเปลี่ยนแปลง</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="edit-profile.js"></script>
+</body>
+</html>

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="form.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.typekit.net/iku2alf.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico">
 </head>
 <body class="skilldex-form-body">
 
@@ -247,13 +248,13 @@
 
                 <div id="setB" class="skilldex-set hidden">
                      <p class="skilldex-section-text">การมีตัวเลือกเป็นสิ่งที่ดีครับ ให้ข้อมูลกับเราอีกนิดเพื่อช่วยให้คุณตัดสินใจได้ง่ายขึ้น</p>
-                    <div class="skilldex-form-group">
-                        <label class="skilldex-label skilldex-label-bold required">ระบุสายอาชีพที่คุณสนใจ</label>
-                        <div class="skilldex-tag-container" data-source="professions.json">
-                             <input type="text" placeholder="พิมพ์เพื่อค้นหาสายอาชีพ เช่น Data Scientist...">
-                        </div>
-                        <div class="skilldex-error-message validation-message"></div>
-                    </div>
+                    <div class="skilldex-form-group" id="interestedProfessions">
+    <label class="skilldex-label skilldex-label-bold required">ระบุสายอาชีพที่คุณสนใจ</label>
+    <div class="skilldex-tag-container" data-source="professions.json">
+         <input type="text" placeholder="พิมพ์เพื่อค้นหาสายอาชีพ เช่น Data Scientist...">
+    </div>
+    <div class="skilldex-error-message validation-message"></div>
+</div>
                     <div class="skilldex-form-group">
                         <label class="skilldex-label skilldex-label-bold">คุณต้องการข้อมูลเปรียบเทียบอาชีพเหล่านี้ในด้านใดบ้าง?</label>
                         <div class="skilldex-grid2">

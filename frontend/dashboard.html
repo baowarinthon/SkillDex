@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.typekit.net/iku2alf.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico">
 </head>
 <body class="dashboard-body">
     <!-- <header class="dashboard-header">
@@ -46,27 +47,42 @@
                 <div class="feature-card" id="cpCard">
                     <div class="feature-content">
                         <div class="feature-icon"></div>
-                    <h3>Find My <br> Carrier</h3>
-                    <p>ค้นหาเส้นทางอาชีพที่ใช่สำหรับคุณ  <br> จากข้อมูลและทักษะที่คุณมี</p>
-                    <a href="findcareer.html" class="action-button">ค้นหาเลย</a>
+                        <h3>Find My <br> Carrier</h3>
+                        <p>ค้นหาเส้นทางอาชีพที่ใช่สำหรับคุณ  <br> จากข้อมูลและทักษะที่คุณมี</p>
+                        <div class="feature-actions">
+                            <a href="findcareer.html" class="action-button">ค้นหาเลย</a>
+                            <button class="save-result-btn" data-result="careerResults">
+                                <img src="assets/images/download.svg" alt="">
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="feature-card" id="mpCard">
                     <div class="feature-content">
                         <div class="feature-icon"></div>
-                    <h3>Build <br> My Path</h3>
-                    <p>สร้างแผนการเดินทางในสายอาชีพที่คุณเลือก พร้อมไทม์ไลน์และเป้าหมาย</p>
-                    <a href="mypath.html" class="action-button">สร้างแผนการ</a>
+                        <h3>Build <br> My Path</h3>
+                        <p>สร้างแผนการเดินทางในสายอาชีพที่คุณเลือก พร้อมไทม์ไลน์และเป้าหมาย</p>
+                        <div class="feature-actions">
+                            <a href="mypath.html" class="action-button">สร้างแผนการ</a>
+                            <button class="save-result-btn" data-result="myPathResults" disabled>
+                                <img src="assets/images/download.svg" alt="">
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="feature-card" id="usCard">
                     <div class="feature-content">
                         <div class="feature-icon"></div>
-                    <h3>Upskill Guide</h3>
-                    <p>แนะนำทักษะที่ต้องเรียนรู้เพิ่มเติม พร้อมคอร์สเรียนและแหล่งข้อมูล</p>
-                    <a href="upskill.html" class="action-button">ดูคำแนะนำ</a>
+                        <h3>Upskill Guide</h3>
+                        <p>แนะนำทักษะที่ต้องเรียนรู้เพิ่มเติม พร้อมคอร์สเรียนและแหล่งข้อมูล</p>
+                        <div class="feature-actions">
+                            <a href="upskill.html" class="action-button">ดูคำแนะนำ</a>
+                            <button class="save-result-btn" data-result="upSkillResult" disabled>
+                                <img src="assets/images/download.svg" alt="">
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,5 +151,10 @@
 
     <script src="dashboard.js"></script>
     <script src="assets/scripts/header.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>

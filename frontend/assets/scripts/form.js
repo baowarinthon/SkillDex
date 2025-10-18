@@ -502,10 +502,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTagData(container) {
         const formGroupId = container.closest('.skilldex-form-group').id;
         if (!formGroupId) return;
-        const key = `tags-${formGroupId}`;
+
+        // เก็บข้อมูล tags ทั้งหมดจาก container
         const tags = Array.from(container.querySelectorAll('.skilldex-tag'))
             .map(t => t.textContent.replace('×', '').trim());
-        updateFormData(key, tags);
+
+        // ถ้าเป็น interestedProfessions ให้เก็บโดยตรงไม่ต้องมี prefix tags-
+        if (formGroupId === 'interestedProfessions') {
+            updateFormData('interestedProfessions', tags);
+        } else {
+            const key = `tags-${formGroupId}`;
+            updateFormData(key, tags);
+        }
     }
 
     function addSkillLevelItem(skillName, formGroup) {
@@ -630,6 +638,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    
+        // เพิ่มเงื่อนไขใน validateSection function
+        if (section.id === 'sectionExplorePlan' && formData.careerClarity === 'B') {
+            const profContainer = document.querySelector('#interestedProfessions .skilldex-tag-container');
+            if (profContainer && profContainer.querySelectorAll('.skilldex-tag').length === 0) {
+                profContainer.classList.add('input-error');
+                const errorMessage = profContainer.closest('.skilldex-form-group').querySelector('.validation-message');
+                if (errorMessage) {
+                    errorMessage.textContent = 'กรุณาระบุอย่างน้อย 1 อาชีพ';
+                    errorMessage.style.display = 'block';
+                }
+                return false;
+            }
+        }
     
         return isSectionValid;
     }

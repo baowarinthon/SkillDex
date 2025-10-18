@@ -1,330 +1,10 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Key สำหรับดึงข้อมูล ต้องตรงกับที่ form.js บันทึกไว้
-//     const APP_STORAGE_KEY = 'skilldexFormData';
-
-//     // --- 1. ดึงข้อมูลจาก Local Storage ---
-//     const savedData = localStorage.getItem(APP_STORAGE_KEY);
-//     const formData = savedData ? JSON.parse(savedData) : null;
-
-//     // --- ถ้าไม่พบข้อมูล ให้แสดงข้อความและหยุดทำงาน ---
-//     if (!formData) {
-//         document.querySelector('.dashboard-main').innerHTML = `
-//             <div class="no-data-container">
-//                 <h2>ยังไม่มีข้อมูล</h2>
-//                 <p>กรุณากลับไปกรอกข้อมูลในหน้าฟอร์มเพื่อเริ่มต้นใช้งาน SkillDex</p>
-//                 <a href="form.html" class="action-button">กลับไปหน้าฟอร์ม</a>
-//             </div>`;
-//         // ซ่อน Header ที่ไม่จำเป็น
-//         const userProfile = document.querySelector('.user-profile');
-//         if (userProfile) userProfile.style.display = 'none';
-//         return; 
-//     }
-
-//     // --- 2. อ้างอิงถึง Element ใน HTML ที่จะนำข้อมูลไปใส่ ---
-//     const elements = {
-//         userName: document.getElementById('userName'),
-//         summaryAbout: document.getElementById('summaryAbout'),
-//         summaryCareerCompass: document.getElementById('summaryCareerCompass'),
-//         summaryHardSkills: document.getElementById('summaryHardSkills'),
-//         summarySoftSkills: document.getElementById('summarySoftSkills'),
-//         summaryExperience: document.getElementById('summaryExperience'),
-//         summaryResume: document.getElementById('summaryResume'),
-//         resetDataBtn: document.getElementById('resetDataBtn'),
-//         editDataBtn: document.getElementById('editDataBtn'),
-//         summaryHeaderH2: document.querySelector('.summary-header h2')
-//     };
-
-//     let isEditMode = false;
-
-//     // --- 3. ฟังก์ชันสำหรับสร้าง HTML แสดงผล (Render Functions) ---
-
-//     /** สร้าง HTML สำหรับแสดงรายละเอียดแต่ละรายการ */
-//     function createDetailItem(label, value) {
-//         if (!value) return ''; // ถ้าไม่มีข้อมูล ไม่ต้องแสดงผล
-//         return `
-//             <div class="detail-item">
-//                 <span class="detail-label">${label}</span>
-//                 <div class="detail-value">${value}</div>
-//             </div>`;
-//     }
-
-//     document.querySelector('.dashboard-main').addEventListener('change', (event) => {
-//     if (event.target.classList.contains('inline-edit')) {
-//         handleInputChange(event);
-//     }
-// });
-
-// // --- (เพิ่ม) Helper function สำหรับสร้าง Form Element ในโหมดแก้ไข ---
-// /**
-//  * สร้าง HTML สำหรับแสดงผลหรือฟอร์มแก้ไข
-//  * @param {string} label - ชื่อหัวข้อ
-//  * @param {string} key - key ใน formData
-//  * @param {string} type - 'text', 'textarea', 'select', 'tags'
-//  * @param {object} [options] - ตัวเลือกเพิ่มเติมสำหรับ select หรือ textarea
-//  */
-// function createEditableItem(label, key, type = 'text', options = {}) {
-//     const value = formData[key] || '';
-
-//     if (isEditMode) {
-//         let inputHtml = '';
-//         switch (type) {
-//             case 'select':
-//                 const selectOptions = options.mapData || {};
-//                 inputHtml = `
-//                     <select class="inline-edit" data-key="${key}">
-//                         ${Object.entries(selectOptions).map(([val, text]) =>
-//                             `<option value="${val}" ${val === value ? 'selected' : ''}>${text}</option>`
-//                         ).join('')}
-//                     </select>`;
-//                 break;
-//             case 'textarea':
-//                  inputHtml = `<textarea class="inline-edit" data-key="${key}" rows="${options.rows || 3}">${value}</textarea>`;
-//                 break;
-//             case 'tags':
-//                 const tags = Array.isArray(value) ? value.join(', ') : '';
-//                 inputHtml = `<input type="text" class="inline-edit" data-key="${key}" value="${tags}" placeholder=" разделенные запятыми">`;
-//                 break;
-//             default: // text
-//                 inputHtml = `<input type="text" class="inline-edit" data-key="${key}" value="${value}">`;
-//         }
-//         return `
-//             <div class="detail-item">
-//                 <span class="detail-label">${label}</span>
-//                 <div class="detail-value">${inputHtml}</div>
-//             </div>`;
-
-//     } else {
-//         // โหมดแสดงผลปกติ
-//         let displayValue = value;
-//         if (type === 'select' && options.mapData) {
-//             displayValue = options.mapData[value] || '-';
-//         } else if (type === 'tags' && Array.isArray(value)) {
-//             displayValue = value.length > 0 ? value.map(tag => `<span class="skill-tag">${tag}</span>`).join(' ') : 'ไม่มีข้อมูล';
-//         } else if (type === 'textarea') {
-//             displayValue = value ? value.replace(/\n/g, '<br>') : 'ไม่มีข้อมูล';
-//         }
-//         return createDetailItem(label, displayValue || '-');
-//     }
-// }
-
-//     /** แสดงข้อมูล "เกี่ยวกับคุณ" */
-//     function renderAbout() {
-//     let html = '';
-//     const statusMap = {
-//         student: 'นักศึกษา',
-//         graduate: 'บัณฑิตจบใหม่',
-//         employee: 'พนักงานบริษัท',
-//         freelance: 'ฟรีแลนซ์'
-//     };
-//     html += createEditableItem('สถานะปัจจุบัน', 'currentStatus', 'select', { mapData: statusMap });
-
-//     if (formData.currentStatus === 'student') {
-//         html += createEditableItem('มหาวิทยาลัย', 'university');
-//         html += createEditableItem('คณะ', 'faculty');
-//         html += createEditableItem('สาขา', 'major');
-//     } else if (formData.currentStatus === 'employee' || formData.currentStatus === 'freelance') {
-//         html += createEditableItem('ตำแหน่งงาน', 'jobTitle');
-//         const expMap = { '<1': 'น้อยกว่า 1 ปี', '1-3': '1-3 ปี', '3-5': '3-5 ปี', '>5': 'มากกว่า 5 ปี' };
-//         html += createEditableItem('ประสบการณ์', 'workExperience', 'select', { mapData: expMap });
-//     }
-//     elements.summaryAbout.innerHTML = html;
-// }
-
-//     /** แสดงข้อมูล "เข็มทิศเส้นทางอาชีพ" */
-//     function renderCareerCompass() {
-//     let html = '';
-//     // ในโหมดแก้ไขจะแสดงทุก field เพื่อให้ผู้ใช้เปลี่ยนประเภทได้
-//     if (isEditMode) {
-//          html += '<h5><strong>เลือกประเภทเป้าหมาย:</strong></h5>';
-//          const clarityMap = { A: 'ยังไม่แน่ใจเส้นทาง', B: 'พอมีสายอาชีพที่สนใจ', C: 'เป้าหมายชัดเจน'};
-//          html += createEditableItem('ความชัดเจน', 'careerClarity', 'select', {mapData: clarityMap});
-//          html += '<hr style="margin: 1rem 0; border-color: #eee;">';
-//     }
-
-
-//     if (formData.careerClarity === 'C') {
-//         html += '<h5><strong>เป้าหมายชัดเจน</strong></h5>';
-//         html += createEditableItem('อาชีพเป้าหมาย', 'targetProfession');
-//         html += createEditableItem('ทักษะที่ต้องพัฒนา', 'futureSkills', 'textarea');
-//     } else if (formData.careerClarity === 'B') {
-//         html += '<h5><strong>พอมีสายอาชีพที่สนใจ</strong></h5>';
-//         html += createEditableItem('อาชีพที่สนใจ', 'tags-interestedProfessions', 'tags');
-//     } else { // 'A' or default
-//         html += '<h5><strong>ยังไม่แน่ใจเส้นทาง</strong></h5>';
-//         html += createEditableItem('กิจกรรมที่ชอบ', 'tags-favoriteActivities', 'tags');
-//     }
-//     elements.summaryCareerCompass.innerHTML = html;
-// }
-    
-//     /** แสดงข้อมูล "Hard Skills" */
-//     function renderHardSkills() {
-//         if (!formData.skillLevels || Object.keys(formData.skillLevels).length === 0) {
-//             elements.summaryHardSkills.innerHTML = '<p>ไม่มีข้อมูล</p>';
-//             return;
-//         }
-//         let html = '';
-//         const levelMap = { '0': 'พื้นฐาน', '1': 'พอใช้ได้', '2': 'เชี่ยวชาญ' };
-//         for (const skillName in formData.skillLevels) {
-//             const skill = formData.skillLevels[skillName];
-//             html += `
-//                 <div class="skill-item">
-//                     <div class="skill-item-header">
-//                         <span class="skill-name">${skill.name}</span>
-//                         <span class="skill-level">${levelMap[skill.level]}</span>
-//                     </div>
-//                     <div class="skill-progress-bar">
-//                          <div class="skill-progress" style="width: ${((parseInt(skill.level) + 1) / 3) * 100}%"></div>
-//                     </div>
-//                 </div>`;
-//         }
-//         elements.summaryHardSkills.innerHTML = html;
-//     }
-
-//     /** แสดงข้อมูล "Soft Skills" */
-//     function renderSoftSkills() {
-//     if (isEditMode) {
-//         const skillsText = (formData.softSkills || []).join(', ');
-//         elements.summarySoftSkills.innerHTML = `
-//             <textarea class="inline-edit" data-key="softSkills" rows="4" placeholder=" разделенные запятыми">${skillsText}</textarea>
-//         `;
-//     } else {
-//         if (!formData.softSkills || formData.softSkills.length === 0) {
-//             elements.summarySoftSkills.innerHTML = '<p>ไม่มีข้อมูล</p>';
-//             return;
-//         }
-//         elements.summarySoftSkills.innerHTML = `<div class="tag-container">
-//             ${formData.softSkills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
-//         </div>`;
-//     }
-// }
-
-//     // /** แสดงข้อมูล "ประสบการณ์" */
-//     // function renderExperience() {
-//     //     elements.summaryExperience.innerHTML = formData.experience 
-//     //         ? `<p>${formData.experience.replace(/\n/g, '<br>')}</p>` 
-//     //         : '<p>ไม่มีข้อมูล</p>';
-//     // }
-
-// function renderExperience() {
-//     elements.summaryExperience.innerHTML = isEditMode
-//         ? `<textarea class="inline-edit" data-key="experience" rows="5">${formData.experience || ''}</textarea>`
-//         : (formData.experience ? `<p>${formData.experience.replace(/\n/g, '<br>')}</p>` : '<p>ไม่มีข้อมูล</p>');
-// }
-
-//     /** แสดงข้อมูล "ไฟล์แนบ" */
-//     function renderResume() {
-//         const fileName = formData['file-name-resumeUpload'];
-//         const fileData = formData['file-data-resumeUpload'];
-//         if (fileName && fileData) {
-//             elements.summaryResume.innerHTML = `
-//                 <a href="${fileData}" download="${fileName}" class="resume-link">
-//                     <span class="material-icons-outlined">description</span>
-//                     <span>${fileName}</span>
-//                 </a>`;
-//         } else {
-//             elements.summaryResume.innerHTML = '<p>ไม่ได้แนบไฟล์</p>';
-//         }
-//     }
-    
-//     // --- 4. เรียกใช้ฟังก์ชันทั้งหมดเพื่อแสดงผล ---
-//     // elements.userName.textContent = formData.fullName || 'ผู้ใช้งาน';
-//     // renderAbout();
-//     // renderCareerCompass();
-//     // renderHardSkills();
-//     // renderSoftSkills();
-//     // renderExperience();
-//     // renderResume();
-
-// // --- (เพิ่ม) ฟังก์ชันจัดการการเปลี่ยนแปลงข้อมูลในฟอร์ม ---
-// function handleInputChange(event) {
-//     const element = event.target;
-//     const key = element.dataset.key;
-//     if (!key) return;
-
-//     let value = element.value;
-
-//     // แปลงข้อมูลสำหรับ tags และ soft skills กลับไปเป็น array
-//     if (key.startsWith('tags-') || key === 'softSkills') {
-//         value = value.split(',').map(item => item.trim()).filter(Boolean);
-//     }
-    
-//     formData[key] = value;
-//     localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(formData));
-//     console.log(`Updated ${key}:`, value);
-
-//     // ถ้ามีการเปลี่ยนสถานะ หรือความชัดเจนของอาชีพ ต้อง render ใหม่
-//     if (key === 'currentStatus' || key === 'careerClarity') {
-//         renderAll();
-//     }
-// }
-
-
-//     // (เพิ่ม) สร้างฟังก์ชันรวมการ Render เพื่อให้เรียกซ้ำได้ง่าย
-// function renderAll() {
-//     elements.userName.textContent = formData.fullName || 'ผู้ใช้งาน';
-
-//     // เมื่ออยู่ในโหมดแก้ไข เปลี่ยนชื่อผู้ใช้เป็น input
-//     if (isEditMode) {
-//         elements.userName.innerHTML = `<input type="text" class="inline-edit user-name-edit" data-key="fullName" value="${formData.fullName || ''}">`;
-//         elements.userName.querySelector('input').addEventListener('blur', handleAutoSave);
-//     }
-
-//     renderAbout();
-//     renderCareerCompass();
-//     renderHardSkills();
-//     renderSoftSkills();
-//     renderExperience();
-//     renderResume();
-// }
-
-// // เรียกใช้ครั้งแรก
-// renderAll();
-
-// /** (เพิ่ม) ฟังก์ชันสำหรับสลับโหมดแก้ไข */
-// function toggleEditMode() {
-//     isEditMode = !isEditMode; // สลับค่า true/false
-
-//     const editBtnIcon = elements.editDataBtn.querySelector('span');
-//     const editBtnText = elements.editDataBtn.childNodes[2]; // เข้าถึง Text Node
-
-//     if (isEditMode) {
-//         editBtnIcon.textContent = 'done'; // เปลี่ยนไอคอนเป็น "เสร็จสิ้น"
-//         editBtnText.textContent = ' เสร็จสิ้นการแก้ไข';
-//         elements.summaryHeaderH2.textContent = 'แก้ไขข้อมูลของคุณ';
-//     } else {
-//         editBtnIcon.textContent = 'edit'; // เปลี่ยนไอคอนกลับเป็น "แก้ไข"
-//         editBtnText.textContent = ' แก้ไขข้อมูล';
-//         elements.summaryHeaderH2.textContent = 'สรุปข้อมูลของคุณ';
-//     }
-
-//     // เรียก Render ใหม่ทั้งหมดเพื่ออัปเดต UI ตามโหมด
-//     renderAll();
-// }
-
-// // (เพิ่ม) Event listener สำหรับปุ่มแก้ไขใหม่
-// elements.editDataBtn.addEventListener('click', toggleEditMode);
-
-//     // --- 5. ตั้งค่าปุ่ม "ล้างข้อมูล" ---
-//     elements.resetDataBtn.addEventListener('click', () => {
-//         if (confirm('คุณต้องการลบข้อมูลทั้งหมดที่กรอกและข้อมูลที่ AI สร้างขึ้นใช่หรือไม่?')) {
-//             // ลบข้อมูลฟอร์มที่ผู้ใช้กรอก
-//             localStorage.removeItem(APP_STORAGE_KEY);
-            
-//             // ลบข้อมูลที่ AI สร้างขึ้นทั้งหมด
-//             localStorage.removeItem('skilldexCareerResults');
-//             localStorage.removeItem('skilldexMyPathResults');
-//             localStorage.removeItem('skilldexUpSkillResult');
-
-//             alert('ลบข้อมูลทั้งหมดเรียบร้อยแล้ว');
-//             window.location.href = 'form.html'; // กลับไปยังหน้าฟอร์ม
-//         }
-//     });
-
-    
-// });
-
-
 document.addEventListener('DOMContentLoaded', () => {
+    // ตรวจสอบว่า elements ถูก reference ถูกต้อง
+    console.log('Elements Check:', {
+        summaryCareerCompass: document.getElementById('summaryCareerCompass'),
+        formData: JSON.parse(localStorage.getItem('skilldexFormData'))
+    });
+
     const APP_STORAGE_KEY = 'skilldexFormData';
 
     // --- 1. ดึงข้อมูล & ตรวจสอบ ---
@@ -422,38 +102,222 @@ document.addEventListener('DOMContentLoaded', () => {
         let html = '';
         if (isEditMode) {
             html += createSelectField('ความชัดเจนในอาชีพ', 'careerClarity', clarityMap);
-            html += createTextField('อาชีพเป้าหมาย', 'targetProfession', formData.careerClarity === 'C');
-            html += createTextareaField('ทักษะที่ต้องพัฒนา', 'futureSkills', formData.careerClarity === 'C');
-            html += createTagsField('อาชีพที่สนใจ', 'tags-interestedProfessions', formData.careerClarity === 'B');
-            html += createTagsField('กิจกรรมที่ชอบ', 'tags-favoriteActivities', formData.careerClarity === 'A');
+            
+            if (formData.careerClarity === 'A') {
+                html += createTagsField('กิจกรรมที่ชอบทำ', 'tags-favoriteActivities');
+                // เพิ่มส่วนของ workValues
+                html += `<div class="detail-item">
+                    <span class="detail-label">สิ่งที่ให้ความสำคัญในการทำงาน</span>
+                    <div class="detail-value">
+                        <div class="tag-container">
+                            ${(formData.workValues || []).map(value => 
+                                `<span class="skill-tag">${getWorkValueLabel(value)}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                </div>`;
+            } else if (formData.careerClarity === 'B') {
+                html += createTagsField('อาชีพที่สนใจ', 'interestedProfessions');
+                
+                // เพิ่มส่วนแสดงจุดเปรียบเทียบ
+                if (formData.comparisonPoints && formData.comparisonPoints.length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">ต้องการเปรียบเทียบในด้าน</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData.comparisonPoints.map(point => 
+                                    `<span class="skill-tag">${getComparisonLabel(point)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                // แสดงปัจจัยในการตัดสินใจ
+                if (formData.decisionFactors && formData.decisionFactors.length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">ปัจจัยในการตัดสินใจ</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData.decisionFactors.map(factor => 
+                                    `<span class="skill-tag">${getFactorLabel(factor)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+            } else if (formData.careerClarity === 'C') {
+                html += createTextField('อาชีพเป้าหมาย', 'targetProfession');
+                
+                // เพิ่มส่วนเป้าหมายในสายงาน
+                html += createSelectField('เป้าหมายในสายงาน', 'careerGoal', {
+                    'specialist': 'เชี่ยวชาญเฉพาะด้าน',
+                    'manager': 'เติบโตสายบริหาร',
+                    'business': 'มีธุรกิจเป็นของตัวเอง',
+                    'top_company': 'ทำงานกับบริษัทชั้นนำ',
+                    'freelance': 'เป็นฟรีแลนซ์'
+                });
+
+                // ทักษะที่ต้องพัฒนา
+                html += createTextareaField('ทักษะที่ต้องพัฒนา', 'futureSkills');
+
+                // วิธีการพัฒนาตัวเอง
+                if (formData.devMethods && formData.devMethods.length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">วิธีการพัฒนาตัวเอง</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData.devMethods.map(method => 
+                                    `<span class="skill-tag">${getDevMethodLabel(method)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+            }
         } else {
             html += createDetailItem('ความชัดเจนในอาชีพ', clarityMap[formData.careerClarity] || '-');
-            if (formData.careerClarity === 'C') {
-                html += createDetailItem('อาชีพเป้าหมาย', formData.targetProfession);
-                html += createDetailItem('ทักษะที่ต้องพัฒนา', (formData.futureSkills || '').replace(/\n/g, '<br>'));
+            
+            if (formData.careerClarity === 'A') {
+                // แสดงกิจกรรมที่ชอบทำ
+                if (formData['tags-favoriteActivities'] && formData['tags-favoriteActivities'].length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">กิจกรรมที่ชอบทำ</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData['tags-favoriteActivities'].map(activity => 
+                                    `<span class="skill-tag">${activity}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                // แสดง Work Values
+                if (formData.workValues && formData.workValues.length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">สิ่งที่ให้ความสำคัญในการทำงาน</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData.workValues.map(value => 
+                                    `<span class="skill-tag">${getWorkValueLabel(value)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                // แสดงรูปแบบการทำงาน
+                if (formData.workCollaboration) {
+                    html += createDetailItem('รูปแบบการทำงานที่ชอบ', getWorkStyleLabel(formData.workCollaboration));
+                }
+                if (formData.workPace) {
+                    html += createDetailItem('จังหวะการทำงานที่ถนัด', getWorkPaceLabel(formData.workPace));
+                }
             } else if (formData.careerClarity === 'B') {
-                html += createDetailItem('อาชีพที่สนใจ', (formData['tags-interestedProfessions'] || []).map(tag => `<span class="skill-tag">${tag}</span>`).join(' '));
-            } else {
-                html += createDetailItem('กิจกรรมที่ชอบ', (formData['tags-favoriteActivities'] || []).map(tag => `<span class="skill-tag">${tag}</span>`).join(' '));
-            }
+                if (formData.interestedProfessions && formData.interestedProfessions.length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">อาชีพที่สนใจ</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData.interestedProfessions.map(prof => 
+                                    `<span class="skill-tag">${prof}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                // เพิ่มส่วนแสดงจุดเปรียบเทียบ
+                if (formData.comparisonPoints && formData.comparisonPoints.length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">ต้องการเปรียบเทียบในด้าน</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData.comparisonPoints.map(point => 
+                                    `<span class="skill-tag">${getComparisonLabel(point)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                // แสดงปัจจัยในการตัดสินใจ
+                if (formData.decisionFactors && formData.decisionFactors.length > 0) {
+                    html += `<div class="detail-item">
+                        <span class="detail-label">ปัจจัยในการตัดสินใจ</span>
+                        <div class="detail-value">
+                            <div class="tag-container">
+                                ${formData.decisionFactors.map(factor => 
+                                    `<span class="skill-tag">${getFactorLabel(factor)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+            } else if (formData.careerClarity === 'C') {
+        // แสดงอาชีพเป้าหมาย
+        if (formData.targetProfession) {
+            html += createDetailItem('อาชีพเป้าหมาย', formData.targetProfession);
+        }
+
+        // แสดงเป้าหมายในสายงาน
+        if (formData.careerGoal) {
+            html += createDetailItem('เป้าหมายในสายงาน', getCareerGoalLabel(formData.careerGoal));
+        }
+
+        // แสดงทักษะที่ต้องพัฒนา
+        if (formData.futureSkills) {
+            html += createDetailItem('ทักษะที่ต้องพัฒนา', formData.futureSkills);
+        }
+
+        // แสดงวิธีการพัฒนาตัวเอง
+        if (formData.devMethods && formData.devMethods.length > 0) {
+            html += `<div class="detail-item">
+                <span class="detail-label">วิธีการพัฒนาตัวเอง</span>
+                <div class="detail-value">
+                    <div class="tag-container">
+                        ${formData.devMethods.map(method => 
+                            `<span class="skill-tag">${getDevMethodLabel(method)}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+            </div>`;
+        }
+    }
         }
         elements.summaryCareerCompass.innerHTML = html;
+
+        console.log('Career Compass Data:', {
+        careerClarity: formData.careerClarity,
+        targetProfession: formData.targetProfession,
+        careerGoal: formData.careerGoal,
+        futureSkills: formData.futureSkills,
+        devMethods: formData.devMethods
+    });
     }
 
     function renderHardSkills() {
-        const skills = formData.hardSkills || [];
-        if (skills.length === 0) {
-            elements.summaryHardSkills.innerHTML = isEditMode ? '<p class="edit-placeholder">เพิ่มทักษะในหน้าฟอร์มหลัก</p>' : '<p>ไม่มีข้อมูล</p>';
+        // ตรวจสอบว่ามี skillLevels หรือไม่
+        if (!formData.skillLevels || Object.keys(formData.skillLevels).length === 0) {
+            elements.summaryHardSkills.innerHTML = isEditMode ? 
+                '<p class="edit-placeholder">เพิ่มทักษะในหน้าฟอร์มหลัก</p>' : 
+                '<p>ไม่มีข้อมูล</p>';
             return;
         }
+
+        // แปลง skillLevels object เป็น array ของ skills
+        const skills = Object.values(formData.skillLevels);
+        
         elements.summaryHardSkills.innerHTML = skills.map(skill => {
             const skillValue = skill.level || '0';
-            const progressWidth = (parseInt(skillValue) / 2) * 100;
+            const progressWidth = ((parseInt(skillValue) + 1) / 3) * 100; // ปรับการคำนวณ progress
+
             if (isEditMode) {
                 return `
                     <div class="skill-item edit-mode">
                         <span class="skill-name">${skill.name}</span>
-                        <select class="inline-edit skill-level-select" data-key="hardSkills" data-skill-name="${skill.name}">
+                        <select class="inline-edit skill-level-select" data-key="skillLevels" data-skill-name="${skill.name}">
                             <option value="0" ${skillValue === '0' ? 'selected' : ''}>พื้นฐาน</option>
                             <option value="1" ${skillValue === '1' ? 'selected' : ''}>พอใช้ได้</option>
                             <option value="2" ${skillValue === '2' ? 'selected' : ''}>เชี่ยวชาญ</option>
@@ -538,6 +402,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (skillIndex > -1) {
                 formData.hardSkills[skillIndex].level = value;
             }
+        } else if (key === 'skillLevels') {
+            const skillName = el.dataset.skillName;
+            formData.skillLevels[skillName] = {
+                name: skillName,
+                level: value
+            };
         } else {
             formData[key] = value;
         }
@@ -564,4 +434,281 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'form.html';
         }
     });
+
+    // อัพเดท resultMapping สำหรับเลือก upskill plan ตามอาชีพ
+    const resultMapping = {
+        'careerResults': 'skilldexCareerResults',
+        'myPathResults': 'skilldexMyPathResults',
+        'upSkillResult': (formData) => {
+            const profession = formData.targetProfession;
+            if (!profession) return null;
+            const professionKey = profession.replace(/\s+/g, '-');
+            return `skilldexUpskillPlan_${professionKey}`;
+        }
+    };
+
+    function checkResults() {
+        const saveButtons = document.querySelectorAll('.save-result-btn');
+        saveButtons.forEach(button => {
+            const resultKey = button.dataset.result;
+            const storageKey = resultMapping[resultKey];
+            
+            if (Array.isArray(storageKey)) {
+                const hasResult = storageKey.some(key => localStorage.getItem(key));
+                button.disabled = !hasResult;
+            } else {
+                const hasResult = localStorage.getItem(storageKey);
+                button.disabled = !hasResult;
+            }
+        });
+
+        // Debug: แสดงสถานะปุ่ม
+        console.log('Button States:', Array.from(saveButtons).map(btn => ({
+            id: btn.dataset.result,
+            disabled: btn.disabled
+        })));
+    }
+
+    // Event listener สำหรับปุ่มบันทึกผล
+    document.querySelectorAll('.save-result-btn').forEach(button => {
+        button.addEventListener('click', async () => {
+            const resultKey = button.dataset.result;
+            let storageKey = resultMapping[resultKey];
+            
+            if (typeof storageKey === 'function') {
+                storageKey = storageKey(formData);
+            }
+            
+            if (!storageKey) {
+                alert('ไม่พบข้อมูลสำหรับอาชีพเป้าหมายนี้');
+                return;
+            }
+
+            const resultData = localStorage.getItem(storageKey);
+            if (!resultData) return;
+
+            try {
+                // สร้าง div ชั่วคราวสำหรับแสดงเนื้อหา
+                const tempDiv = document.createElement('div');
+                tempDiv.id = 'temp-content-for-pdf';
+                tempDiv.style.padding = '20px';
+                tempDiv.style.fontFamily = 'Sarabun, sans-serif';
+                tempDiv.style.position = 'absolute';
+                tempDiv.style.left = '-9999px';
+                tempDiv.style.background = '#fff';
+                tempDiv.style.width = '800px';
+                
+                // แปลงและจัดรูปแบบเนื้อหา
+                const content = formatResultContent(JSON.parse(resultData), resultKey);
+                tempDiv.innerHTML = content.replace(/\n/g, '<br>');
+                
+                document.body.appendChild(tempDiv);
+
+                // ใช้ html2canvas แปลงเป็นรูปภาพ
+                const canvas = await html2canvas(tempDiv, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    windowWidth: 800,
+                    onclone: (clonedDoc) => {
+                        const clonedElement = clonedDoc.getElementById('temp-content-for-pdf');
+                        if (clonedElement) {
+                            clonedElement.style.position = 'static';
+                        }
+                    }
+                });
+
+                // สร้าง PDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'px', [canvas.width / 2, canvas.height / 2]);
+                
+                // เพิ่มรูปภาพลงใน PDF
+                pdf.addImage(
+                    canvas.toDataURL('image/png'), 
+                    'PNG', 
+                    0, 
+                    0, 
+                    canvas.width / 2, 
+                    canvas.height / 2
+                );
+
+                // บันทึกไฟล์
+                const filename = `skilldex_${resultKey}_${new Date().toISOString().split('T')[0]}.pdf`;
+                pdf.save(filename);
+
+                // ลบ div ชั่วคราว
+                document.body.removeChild(tempDiv);
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('เกิดข้อผิดพลาดในการสร้างไฟล์ PDF');
+            }
+        });
+    });
+
+    // อัพเดทฟังก์ชัน formatResultContent สำหรับจัดรูปแบบเนื้อหา
+    function formatResultContent(data, type) {
+        const date = new Date().toLocaleDateString('th-TH', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        switch(type) {
+            case 'careerResults':
+                return `
+                    <h2>ผลการวิเคราะห์เส้นทางอาชีพ</h2>
+                    <p>วันที่: ${date}</p>
+                    <div style="margin: 20px 0">
+                        <h3>คำแนะนำ</h3>
+                        <p>${data.introduction || ''}</p>
+                    </div>
+                    ${data.career_recommendations?.map(rec => `
+                        <div style="margin: 20px 0; padding: 10px; border-left: 3px solid #4A90E2;">
+                            <h3>${rec.career_title}</h3>
+                            <p>ความเหมาะสม: ${rec.alignment_score}%</p>
+                            <p>${rec.summary}</p>
+                            
+                            <h4>ทักษะสำคัญ:</h4>
+                            <ul>
+                                ${rec.key_skills?.map(skill => `<li>${skill}</li>`).join('') || '<li>ไม่มีข้อมูล</li>'}
+                            </ul>
+                        </div>
+                    `).join('') || '<p>ไม่มีข้อมูล</p>'}
+                `;
+            case 'myPathResults':
+                return `แผนที่เส้นทางอาชีพ
+วันที่: ${date}
+
+คำแนะนำ: ${data.introduction || ''}
+
+${data.career_paths?.map((path, index) => `
+เส้นทางที่ ${index + 1}: ${path.path_title}
+
+ข้อดี/โอกาส:
+${path.pros?.map(pro => `• ${pro}`).join('\n') || 'ไม่มีข้อมูล'}
+
+ความท้าทาย:
+${path.cons?.map(con => `• ${con}`).join('\n') || 'ไม่มีข้อมูล'}
+
+ข้อมูลตลาด:
+- เงินเดือนเริ่มต้น: ${path.supporting_data?.avg_starting_salary_bkk || 'ไม่มีข้อมูล'}
+- แนวโน้มตลาด: ${path.supporting_data?.market_trend || 'ไม่มีข้อมูล'}
+
+แผนการพัฒนา:
+${path.roadmap?.map(phase => `
+${phase.phase_title}:
+${phase.milestones?.map(ms => `• ${ms.title}
+  ${ms.description}
+  แหล่งเรียนรู้: ${ms.resources?.join(', ')}`).join('\n')}
+`).join('\n') || 'ไม่มีข้อมูล'}
+`).join('\n')}`;
+
+            case 'upSkillResult':
+                return `แผนการพัฒนาทักษะ
+วันที่: ${date}
+
+คำแนะนำ: ${data.introduction || ''}
+
+ทักษะที่ต้องพัฒนา:
+${data.upskill_plan?.map(skill => `
+• ${skill.skill_to_learn}
+  ระดับความสำคัญ: ${skill.importance_level === 'High' ? 'สูง' : skill.importance_level === 'Medium' ? 'ปานกลาง' : 'พื้นฐาน'}
+  เหตุผล: ${skill.reason_to_learn}
+
+  คอร์สแนะนำ:
+  ${skill.recommended_courses?.map(course => `  - ${course.title} (${course.platform})`).join('\n') || '  ไม่มีข้อมูล'}
+
+  โปรเจกต์แนะนำ:
+  ${skill.recommended_projects?.map(project => `  - ${project.title}\n    ${project.description}`).join('\n') || '  ไม่มีข้อมูล'}
+
+  แหล่งเรียนรู้เพิ่มเติม:
+  ${skill.additional_resources?.map(resource => `  - ${resource.title} (${resource.type})`).join('\n') || '  ไม่มีข้อมูล'}
+`).join('\n') || 'ไม่มีข้อมูล'}`;
+
+            default:
+                return 'ไม่พบข้อมูล';
+        }
+    }
+
+    // เรียกใช้ checkResults เมื่อโหลดหน้า
+    checkResults();
 });
+
+// เพิ่มฟังก์ชันแปลงค่าปัจจัย
+function getFactorLabel(factor) {
+    const factorMap = {
+        'passion': 'ความชอบและความถนัด',
+        'market': 'ความต้องการตลาด',
+        'skills': 'ทักษะที่มี',
+        'salary': 'รายได้',
+        'market_demand': 'โอกาสในการเติบโต'
+    };
+    return factorMap[factor] || factor;
+}
+
+// เพิ่มฟังก์ชันสำหรับแปลงค่าต่างๆ
+function getWorkValueLabel(value) {
+    const valueMap = {
+        'income': 'รายได้',
+        'growth': 'โอกาสเติบโต',
+        'impact': 'การสร้างผลกระทบ',
+        'balance': 'Work-life Balance',
+        'stability': 'ความมั่นคง'
+    };
+    return valueMap[value] || value;
+}
+
+function getWorkStyleLabel(style) {
+    const styleMap = {
+        'solo': 'ทำงานคนเดียว',
+        'team': 'ทำงานเป็นทีม',
+        'mix': 'ผสมผสาน'
+    };
+    return styleMap[style] || style;
+}
+
+function getWorkPaceLabel(pace) {
+    const paceMap = {
+        'steady': 'งานที่มีระบบแน่นอน',
+        'dynamic': 'งานที่มีความยืดหยุ่น',
+        'mixed': 'ผสมผสาน'
+    };
+    return paceMap[pace] || pace;
+}
+
+// เพิ่มฟังก์ชันแปลงค่าจุดเปรียบเทียบ
+function getComparisonLabel(point) {
+    const comparisonMap = {
+        'skills': 'ทักษะที่ต้องใช้',
+        'salary': 'เงินเดือนเฉลี่ย',
+        'market_demand': 'ความต้องการตลาด',
+        'growth': 'โอกาสเติบโต',
+        'work_life': 'Work-Life Balance'
+    };
+    return comparisonMap[point] || point;
+}
+
+// เพิ่มฟังก์ชันแปลงค่าวิธีการพัฒนาตัวเอง
+function getDevMethodLabel(method) {
+    const methodMap = {
+        'online_course': 'เรียนคอร์สออนไลน์',
+        'projects': 'ทำโปรเจกต์',
+        'reading': 'อ่านบทความ/หนังสือ',
+        'community': 'เข้าร่วมคอมมูนิตี้',
+        'bootcamp': 'เรียน Bootcamp',
+        'certification': 'สอบใบรับรอง'
+    };
+    return methodMap[method] || method;
+}
+
+// เพิ่มฟังก์ชันแปลงค่าเป้าหมายในสายงาน
+function getCareerGoalLabel(goal) {
+    const goalMap = {
+        'specialist': 'เชี่ยวชาญเฉพาะด้าน',
+        'manager': 'เติบโตสายบริหาร',
+        'business': 'มีธุรกิจเป็นของตัวเอง',
+        'top_company': 'ทำงานกับบริษัทชั้นนำ',
+        'freelance': 'เป็นฟรีแลนซ์'
+    };
+    return goalMap[goal] || goal;
+}
